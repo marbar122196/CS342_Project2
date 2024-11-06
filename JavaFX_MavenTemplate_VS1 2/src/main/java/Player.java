@@ -9,9 +9,10 @@ public class Player{
     private int totalWinnings;
 
     public Player(){
+        Deck gameDeck = Dealer.getDeck();
         hand = Dealer.dealPlayerHand();
-
     }
+
 //    public void resetWinnings(){}
 //    public boolean lockInBets(){}
 //    public boolean isBetsLocked(){}

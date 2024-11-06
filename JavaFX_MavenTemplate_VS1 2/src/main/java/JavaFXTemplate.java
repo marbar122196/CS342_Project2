@@ -43,6 +43,7 @@ public class JavaFXTemplate extends Application {
 	BorderPane borderPane;
 	HBox hBox;
 	PauseTransition pause = new PauseTransition(Duration.seconds(3));
+	Button sceneChange;
 
 
 
@@ -51,7 +52,30 @@ public class JavaFXTemplate extends Application {
 //	public void newLook(){}
 //	public void quitGame(){}
 //	public void showRules(){}
-	public Scene creatWelcomeScreen(){
+	public Scene startNewGame(){
+		BorderPane pane = new BorderPane(); // idk if a borderpan is the best option here but
+		TextField playPlayerOne = new TextField();
+		TextField antePlayerOne = new TextField();
+		TextField pairPlusPlayerOne = new TextField();
+
+		TextField playPlayerTwo = new TextField();
+		TextField antePlayerTwo = new TextField();
+		TextField pairPlusPlayerTwo = new TextField();
+
+		playPlayerOne.setEditable(false);
+		playPlayerTwo.setEditable(false);
+
+		VBox betsPlayerOne = new VBox(playPlayerOne, antePlayerOne, pairPlusPlayerOne);
+		VBox betsPlayerTwo = new VBox(playPlayerTwo, antePlayerTwo, pairPlusPlayerTwo);
+
+		pane.setLeft(betsPlayerOne);
+		pane.setRight(betsPlayerTwo);
+
+		Scene scene = new Scene(pane, 500, 400);
+		return scene;
+	}
+
+	public Scene createWelcomeScreen(Stage primaryStage){
 		BorderPane outerPane = new BorderPane();
 		outerPane.setStyle("-fx-background-color: #A30262;");
 
@@ -92,6 +116,10 @@ public class JavaFXTemplate extends Application {
 		innerPane.setMaxHeight(350);
 
 
+		//changes scene when play button is pressed
+		start.setOnAction(e -> primaryStage.setScene(sceneMap.get("game")));
+
+
 
 //		borderPane = new BorderPane();
 		outerPane.setPrefSize(500, 400);
@@ -116,13 +144,11 @@ public class JavaFXTemplate extends Application {
 //			}
 //		}
 
-		sceneMap.put("welcomeScreen", creatWelcomeScreen());
+		sceneMap.put("welcomeScreen", createWelcomeScreen(primaryStage));
+		sceneMap.put("game", startNewGame());
 
 		primaryStage.setScene(sceneMap.get("welcomeScreen")); //change this
 		primaryStage.show();
-
-	}
-	public void startNewGame(){
 
 	}
 //	public void updateGameInfo(String info){}

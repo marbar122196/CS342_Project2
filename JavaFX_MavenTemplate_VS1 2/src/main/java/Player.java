@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Player{
 
     private ArrayList<Card> hand;
@@ -6,9 +8,9 @@ public class Player{
     private int anteBet;
     private int totalWinnings;
 
-    public Player(){}
-    public void resetWinnings(){}
-    public boolean lockInBets(){}
-    public boolean isBetsLocked(){}
+//    public Player(){}
+//    public void resetWinnings(){}
+//    public boolean lockInBets(){}
+//    public boolean isBetsLocked(){}
 }
 

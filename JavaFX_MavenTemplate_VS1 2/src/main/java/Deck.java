@@ -13,12 +13,12 @@ public class Deck extends ArrayList<Card>{
         suits.add('D');
 
         for (int i = 2; i <= 14; i++){
-            suits.add(i);
+            values.add(i);
         }
         newDeck();
     }
 
-    void public newDeck(){
+    public void newDeck(){
 
         this.clear();
 

@@ -8,7 +8,10 @@ public class Player{
     private int anteBet;
     private int totalWinnings;
 
-//    public Player(){}
+    public Player(){
+        hand = Dealer.dealPlayerHand();
+
+    }
 //    public void resetWinnings(){}
 //    public boolean lockInBets(){}
 //    public boolean isBetsLocked(){}

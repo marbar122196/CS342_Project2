@@ -5,6 +5,9 @@ import javafx.animation.SequentialTransition;
 import javafx.application.Application;
 import javafx.scene.control.Label;
 import java.util.HashMap;
+import javafx.animation.PauseTransition;
+import javafx.util.Duration;
+
 
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
@@ -39,6 +42,7 @@ public class JavaFXTemplate extends Application {
 	EventHandler<ActionEvent> myHandler;
 	BorderPane borderPane;
 	HBox hBox;
+	PauseTransition pause = new PauseTransition(Duration.seconds(3));
 
 
 
@@ -118,7 +122,9 @@ public class JavaFXTemplate extends Application {
 		primaryStage.show();
 
 	}
-//	public void startNewGame(){}
+	public void startNewGame(){
+
+	}
 //	public void updateGameInfo(String info){}
 
 }

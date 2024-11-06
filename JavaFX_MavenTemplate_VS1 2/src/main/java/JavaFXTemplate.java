@@ -8,6 +8,7 @@ import java.util.HashMap;
 
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -33,7 +34,7 @@ public class JavaFXTemplate extends Application {
 	Button start, exit;
 	Label intro, authors;
 	VBox root;
-	HashMap sceneMap = new HashMap<String, Scene>();
+	HashMap<String, Scene> sceneMap= new HashMap<String, Scene>();
 
 	EventHandler<ActionEvent> myHandler;
 	BorderPane borderPane;
@@ -46,16 +47,11 @@ public class JavaFXTemplate extends Application {
 //	public void newLook(){}
 //	public void quitGame(){}
 //	public void showRules(){}
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		launch(args);
-	}
+	public Scene creatWelcomeScreen(){
+		BorderPane outerPane = new BorderPane();
+		outerPane.setStyle("-fx-background-color: #A30262;");
 
-	@Override
-	public void start(Stage primaryStage){
-		primaryStage.setTitle("Three Card Poker");
-
-		start = new Button("Start <3");
+		start = new Button("Play <3");
 		exit = new Button("Exit >:(");
 		start.setMinWidth(200);
 		exit.setMinWidth(200);
@@ -76,25 +72,49 @@ public class JavaFXTemplate extends Application {
 		Region r3 = new Region();
 		r3.setMinWidth(30);
 
+		Region r4 = new Region();
+		r4.setMinWidth(30);
+
+		Region r5 = new Region();
+		r5.setMinWidth(100);
+
+		hBox = new HBox(r1, intro, r3);
+		HBox buttonBox = new HBox(start, r4, exit);
+		VBox welcomeText = new VBox(hBox, r2, authors, r5, buttonBox);
+
+		StackPane innerPane = new StackPane(welcomeText);
+		innerPane.setStyle("-fx-background-color: #FFFFFF; -fx-padding: 20;");
+		innerPane.setMaxWidth(450);
+		innerPane.setMaxHeight(350);
+
+
+
+//		borderPane = new BorderPane();
+		outerPane.setPrefSize(500, 400);
+
+		outerPane.setCenter(innerPane);
+		Scene scene = new Scene(outerPane, 500, 400);
+		return scene;
+
+	}
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		launch(args);
+	}
+
+	@Override
+	public void start(Stage primaryStage){
+		primaryStage.setTitle("Three Card Poker");
+
 //		myHandler = new EventHandler<ActionEvent>{ //change to change scene
 //			public void handle(ActionEvent e){
 //
 //			}
 //		}
 
+		sceneMap.put("welcomeScreen", creatWelcomeScreen());
 
-		hBox = new HBox(r1, intro, r2, authors, r3);
-		VBox top = new VBox(hBox, authors);
-		HBox buttonBox = new HBox(start, r1, exit);
-
-
-
-		borderPane = new BorderPane();
-		borderPane.setPrefSize(500, 400);
-		borderPane.setTop(top);
-		borderPane.setCenter(buttonBox);
-		Scene scene = new Scene(borderPane, 360, 360);
-		primaryStage.setScene(scene); //change this
+		primaryStage.setScene(sceneMap.get("welcomeScreen")); //change this
 		primaryStage.show();
 
 	}

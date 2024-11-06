@@ -4,6 +4,7 @@ import javafx.animation.RotateTransition;
 import javafx.animation.SequentialTransition;
 import javafx.application.Application;
 import javafx.scene.control.Label;
+import java.util.HashMap;
 
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
@@ -32,7 +33,7 @@ public class JavaFXTemplate extends Application {
 	Button start, exit;
 	Label intro, authors;
 	VBox root;
-	sceneMap = new HashMap<String, scene>();
+	HashMap sceneMap = new HashMap<String, Scene>();
 
 	EventHandler<ActionEvent> myHandler;
 	BorderPane borderPane;
@@ -51,7 +52,7 @@ public class JavaFXTemplate extends Application {
 	}
 
 	@Override
-	public void start(Stage primaryStage) throws Exception{
+	public void start(Stage primaryStage){
 		primaryStage.setTitle("Three Card Poker");
 
 		start = new Button("Start <3");

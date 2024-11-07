@@ -1,6 +1,10 @@
-/Users/codarichmond/CS342_Project2/JavaFX_MavenTemplate_VS1 2/src/main/java/Card.java
-/Users/codarichmond/CS342_Project2/JavaFX_MavenTemplate_VS1 2/src/main/java/Dealer.java
-/Users/codarichmond/CS342_Project2/JavaFX_MavenTemplate_VS1 2/src/main/java/Deck.java
 /Users/codarichmond/CS342_Project2/JavaFX_MavenTemplate_VS1 2/src/main/java/JavaFXTemplate.java
-/Users/codarichmond/CS342_Project2/JavaFX_MavenTemplate_VS1 2/src/main/java/Player.java
-/Users/codarichmond/CS342_Project2/JavaFX_MavenTemplate_VS1 2/src/main/java/ThreeCardLogic.java
+/Users/codarichmond/CS342_Project2/JavaFX_MavenTemplate_VS1 2/src/main/java/components/ExitScreen.java
+/Users/codarichmond/CS342_Project2/JavaFX_MavenTemplate_VS1 2/src/main/java/components/OptionsMenu.java
+/Users/codarichmond/CS342_Project2/JavaFX_MavenTemplate_VS1 2/src/main/java/components/RulesScreen.java
+/Users/codarichmond/CS342_Project2/JavaFX_MavenTemplate_VS1 2/src/main/java/components/WinningHandsScreen.java
+/Users/codarichmond/CS342_Project2/JavaFX_MavenTemplate_VS1 2/src/main/java/gamelogic/Card.java
+/Users/codarichmond/CS342_Project2/JavaFX_MavenTemplate_VS1 2/src/main/java/gamelogic/Dealer.java
+/Users/codarichmond/CS342_Project2/JavaFX_MavenTemplate_VS1 2/src/main/java/gamelogic/Deck.java
+/Users/codarichmond/CS342_Project2/JavaFX_MavenTemplate_VS1 2/src/main/java/gamelogic/Player.java
+/Users/codarichmond/CS342_Project2/JavaFX_MavenTemplate_VS1 2/src/main/java/gamelogic/ThreeCardLogic.java

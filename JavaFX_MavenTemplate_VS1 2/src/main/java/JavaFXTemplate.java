@@ -39,7 +39,7 @@ public class JavaFXTemplate extends Application {
 //	private Dealer theDealer;
 
 	Button start, exit, Options,optionsButton,freshStartButton,newLookButton,rulesButton,winningHandsButton,exitButton;
-	Label intro, authors,rulesText,rulesTitle;
+	Label intro, authors,rulesText,rulesTitle,winningHandsText,winningHandsTitle;
 	VBox root;
 	HashMap<String, Scene> sceneMap= new HashMap<String, Scene>();
 
@@ -50,6 +50,9 @@ public class JavaFXTemplate extends Application {
 	Button sceneChange;
 	Font customFont = Font.loadFont(getClass().getResourceAsStream("/DotGothic16-Regular.ttf"), 20);
 
+	int titleSize = 30;
+	int bodySize = 20;
+
 
 
 //	public void pauseGame(){}
@@ -57,6 +60,52 @@ public class JavaFXTemplate extends Application {
 //	public void newLook(){}
 //	public void quitGame(){}
 //	public void showRules(){}
+public void winningHands(Stage optionsStage) {
+	// Ccreatge stage for winning hands modal
+	Stage winningHandsStage = new Stage();
+	winningHandsStage.initModality(Modality.APPLICATION_MODAL);
+	winningHandsStage.initOwner(optionsStage);
+	winningHandsStage.setTitle("Winning Hands");
+
+	//title
+	Label winningHandsTitle = new Label("pair plus winnings");
+	winningHandsTitle.setFont(Font.font(customFont.getFamily(), titleSize));//have to do this to change text size
+	winningHandsTitle.setStyle("-fx-text-fill: #A30262;");
+	winningHandsTitle.setStyle("-fx-text-alignment: center;");
+
+	// winninghands text
+	winningHandsText = new Label(
+			"Straight Flush: 40 to 1\n\n" +
+					"Three of a Kind: 30 to 1\n\n" +
+					"Straight: 6 to 1\n\n" +
+					"Flush: 3 to 1\n\n" +
+					"Pair: 1 to 1"
+	);
+
+	winningHandsText.setFont(Font.font(customFont.getFamily(), bodySize));
+	winningHandsText.setStyle("-fx-text-fill: #A30262;");
+	winningHandsText.setWrapText(true);
+	winningHandsText.setStyle("-fx-text-alignment: center;");
+
+
+	// escape
+	Button escapeButton = new Button("escape");
+	escapeButton.setFont(customFont);
+	escapeButton.setStyle("-fx-background-color: #A30262; -fx-text-fill: white;");
+	escapeButton.setOnAction(e -> winningHandsStage.close());
+
+	// set layout
+	VBox winningHandsBox = new VBox(10, winningHandsTitle, winningHandsText, escapeButton);
+	winningHandsBox.setAlignment(Pos.CENTER);
+	winningHandsBox.setPadding(new Insets(30));
+	winningHandsBox.setStyle("-fx-background-color: #FFFFFF; -fx-border-color: #A30262; -fx-border-width: 15px;");
+
+	//create scene
+	Scene winningHandsScene = new Scene(winningHandsBox, 500, 500);
+	winningHandsStage.setScene(winningHandsScene);
+	winningHandsStage.showAndWait(); // show as modal
+}
+
 
 	public void rules(Stage optionsStage){
 		//making stage and setting optionsstage as its parent
@@ -66,8 +115,8 @@ public class JavaFXTemplate extends Application {
 
 		// title
 		rulesTitle = new Label("rules");
-		rulesTitle.setFont(customFont);
-		rulesTitle.setStyle("-fx-font-size: 28px; -fx-text-fill: #A30262;");
+		rulesTitle.setFont(Font.font(customFont.getFamily(), titleSize));
+		rulesTitle.setStyle("-fx-text-fill: #A30262;");
 		rulesTitle.setStyle("-fx-text-alignment: center;");
 
 		// rules
@@ -87,8 +136,8 @@ public class JavaFXTemplate extends Application {
 						"  - Player Wins: Player receives 1 to 1 payout on both wagers."
 		);
 		//font and center text
-		rulesText.setFont(customFont);
-		rulesText.setStyle("-fx-font-size: 18px; -fx-text-fill: #A30262;");
+		rulesText.setFont(Font.font(customFont.getFamily(), bodySize));
+		rulesText.setStyle(" -fx-text-fill: #A30262;");
 		rulesText.setWrapText(true);
 		rulesText.setStyle("-fx-text-alignment: center;");
 		rulesText.setAlignment(Pos.CENTER);
@@ -139,7 +188,7 @@ public class JavaFXTemplate extends Application {
 		freshStartButton.setOnAction(e -> System.out.println("Fresh Start clicked"));
 		newLookButton.setOnAction(e -> System.out.println("New Look clicked"));
 		rulesButton.setOnAction(e -> rules(optionsStage));
-		winningHandsButton.setOnAction(e -> System.out.println("Winning Hands clicked"));
+		winningHandsButton.setOnAction(e -> winningHands(optionsStage));
 		exitButton.setOnAction(e -> optionsStage.close());
 
 		// Add buttons to the VBox and set alignment

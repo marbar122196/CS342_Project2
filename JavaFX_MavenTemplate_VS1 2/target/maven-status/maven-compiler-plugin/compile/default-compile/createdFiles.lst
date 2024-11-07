@@ -1,6 +1,6 @@
 Card.class
 Dealer.class
-JavaFXTemplate.class
 Deck.class
-ThreeCardLogic.class
+JavaFXTemplate.class
 Player.class
+ThreeCardLogic.class

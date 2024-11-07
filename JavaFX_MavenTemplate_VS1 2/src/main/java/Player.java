@@ -9,8 +9,11 @@ public class Player{
     private int totalWinnings;
 
     public Player(){
-        Deck gameDeck = Dealer.getDeck();
-        hand = Dealer.dealPlayerHand(gameDeck);
+        hand = new ArrayList<>();
+    }
+
+    public void setHand(ArrayList<Card> hand){
+        this.hand = hand;
     }
 
 //    public void resetWinnings(){}

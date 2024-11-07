@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class Dealer {
 
-    private Deck theDeck; // we CANNOT change signature so this cannot be static :(
+    private static Deck theDeck; // we CANNOT change signature so this cannot be static :(
     private ArrayList<Card> dealersHand;
 
     public Dealer(){

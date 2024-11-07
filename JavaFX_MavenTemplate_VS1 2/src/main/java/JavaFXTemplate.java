@@ -26,6 +26,8 @@ import javafx.scene.layout.HBox;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.layout.Region;
+import javafx.animation.PauseTransition;
+import javafx.application.Platform;
 
 
 public class JavaFXTemplate extends Application {
@@ -118,6 +120,11 @@ public class JavaFXTemplate extends Application {
 
 		//changes scene when play button is pressed
 		start.setOnAction(e -> primaryStage.setScene(sceneMap.get("game")));
+		exit.setOnAction(e -> {//delays exit for user viewability
+			PauseTransition pause = new PauseTransition(Duration.seconds(.8));
+			pause.setOnFinished(event -> Platform.exit());
+			pause.play();
+		});
 
 
 

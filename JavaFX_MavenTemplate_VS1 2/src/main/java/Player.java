@@ -10,7 +10,7 @@ public class Player{
 
     public Player(){
         Deck gameDeck = Dealer.getDeck();
-        hand = Dealer.dealPlayerHand();
+        hand = Dealer.dealPlayerHand(gameDeck);
     }
 
 //    public void resetWinnings(){}

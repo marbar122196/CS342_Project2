@@ -63,7 +63,6 @@ public class JavaFXTemplate extends Application {
 		Stage rulesStage = new Stage();
 		rulesStage.initModality(Modality.APPLICATION_MODAL);
 		rulesStage.initOwner(optionsStage);
-		rulesStage.setTitle("Rules");
 
 		// title
 		rulesTitle = new Label("rules");

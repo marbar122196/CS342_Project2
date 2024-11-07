@@ -39,7 +39,7 @@ public class JavaFXTemplate extends Application {
 //	private Dealer theDealer;
 
 	Button start, exit, Options,optionsButton,freshStartButton,newLookButton,rulesButton,winningHandsButton,exitButton;
-	Label intro, authors;
+	Label intro, authors,rulesText,rulesTitle;
 	VBox root;
 	HashMap<String, Scene> sceneMap= new HashMap<String, Scene>();
 
@@ -48,7 +48,7 @@ public class JavaFXTemplate extends Application {
 	HBox hBox;
 	PauseTransition pause = new PauseTransition(Duration.seconds(3));
 	Button sceneChange;
-//	Font customFont = Font.loadFont(getClass().getResourceAsStream("/DotGothic16-Regular.ttf"), 20);
+	Font customFont = Font.loadFont(getClass().getResourceAsStream("/DotGothic16-Regular.ttf"), 20);
 
 
 
@@ -57,6 +57,61 @@ public class JavaFXTemplate extends Application {
 //	public void newLook(){}
 //	public void quitGame(){}
 //	public void showRules(){}
+
+	public void rules(Stage optionsStage){
+		//making stage and setting optionsstage as its parent
+		Stage rulesStage = new Stage();
+		rulesStage.initModality(Modality.APPLICATION_MODAL);
+		rulesStage.initOwner(optionsStage);
+		rulesStage.setTitle("Rules");
+
+		// title
+		rulesTitle = new Label("rules");
+		rulesTitle.setFont(customFont);
+		rulesTitle.setStyle("-fx-font-size: 28px; -fx-text-fill: #A30262;");
+		rulesTitle.setStyle("-fx-text-alignment: center;");
+
+		// rules
+		rulesText = new Label(
+				"Ante Wager: Players place an ante wager ($5 - $25).\n\n" +
+						"Optional Pair Plus Bet: Players can also make a Pair Plus wager ($5 - $25), paying\n" +
+						"based solely on their hand if it has at least a pair of 2’s, regardless of the dealer's hand.\n\n" +
+						"Dealing Cards: Each player and the dealer receive three cards; players’ cards are face\n" +
+						"up, the dealer’s face down.\n\n" +
+						"Play or Fold:\n" +
+						"• Fold: Player loses both ante and Pair Plus wagers (if made).\n" +
+						"• Play: Player places a play wager equal to the ante.\n\n" +
+						"Dealer's Hand:\n" +
+						"• Below Queen High: Play wager is returned, and ante is pushed.\n" +
+						"• Queen High or Better: Dealer’s hand is compared to the player’s hand:\n" +
+						"  - Dealer Wins: Player loses both ante and play wagers.\n" +
+						"  - Player Wins: Player receives 1 to 1 payout on both wagers."
+		);
+		//font and center text
+		rulesText.setFont(customFont);
+		rulesText.setStyle("-fx-font-size: 18px; -fx-text-fill: #A30262;");
+		rulesText.setWrapText(true);
+		rulesText.setStyle("-fx-text-alignment: center;");
+		rulesText.setAlignment(Pos.CENTER);
+
+		// escape button
+		Button escapeButton = new Button("escape");
+		escapeButton.setFont(customFont);
+		escapeButton.setStyle("-fx-background-color: #A30262; -fx-text-fill: white;");
+		escapeButton.setOnAction(e -> rulesStage.close());
+
+		//set alignment
+		VBox rulesBox = new VBox(10, rulesTitle, rulesText, escapeButton);
+		rulesBox.setAlignment(Pos.CENTER);
+		rulesBox.setPadding(new Insets(20));
+		rulesBox.setStyle("-fx-background-color: #FFFFFF; -fx-border-color: #A30262; -fx-border-width: 15px;");
+
+		Scene rulesScene = new Scene(rulesBox, 850, 850);
+		rulesStage.setScene(rulesScene);
+		rulesStage.showAndWait(); // show as modal
+
+	}
+
 	public void optionsMenu(Stage primaryStage){
 		Stage optionsStage = new Stage();
 		optionsStage.initModality(Modality.APPLICATION_MODAL);//sets modality to pause all other windows until its closed
@@ -84,7 +139,7 @@ public class JavaFXTemplate extends Application {
 		optionsButton.setOnAction(e -> System.out.println("Options clicked"));
 		freshStartButton.setOnAction(e -> System.out.println("Fresh Start clicked"));
 		newLookButton.setOnAction(e -> System.out.println("New Look clicked"));
-		rulesButton.setOnAction(e -> System.out.println("Rules clicked"));
+		rulesButton.setOnAction(e -> rules(optionsStage));
 		winningHandsButton.setOnAction(e -> System.out.println("Winning Hands clicked"));
 		exitButton.setOnAction(e -> optionsStage.close());
 
@@ -161,7 +216,7 @@ public class JavaFXTemplate extends Application {
 		outerPane.setStyle("-fx-background-color: #A30262;");
 
 		start = new Button("Play <3");
-//		start.setFont(customFont);
+		start.setFont(customFont);
 		exit = new Button("Exit >:(");
 		start.setMinWidth(200);
 		exit.setMinWidth(200);

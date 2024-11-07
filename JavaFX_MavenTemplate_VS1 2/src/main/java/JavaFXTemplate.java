@@ -9,7 +9,6 @@ import javafx.animation.PauseTransition;
 import javafx.util.Duration;
 import javafx.stage.Modality;
 
-
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
@@ -49,6 +48,7 @@ public class JavaFXTemplate extends Application {
 	HBox hBox;
 	PauseTransition pause = new PauseTransition(Duration.seconds(3));
 	Button sceneChange;
+//	Font customFont = Font.loadFont(getClass().getResourceAsStream("/DotGothic16-Regular.ttf"), 20);
 
 
 
@@ -161,6 +161,7 @@ public class JavaFXTemplate extends Application {
 		outerPane.setStyle("-fx-background-color: #A30262;");
 
 		start = new Button("Play <3");
+//		start.setFont(customFont);
 		exit = new Button("Exit >:(");
 		start.setMinWidth(200);
 		exit.setMinWidth(200);

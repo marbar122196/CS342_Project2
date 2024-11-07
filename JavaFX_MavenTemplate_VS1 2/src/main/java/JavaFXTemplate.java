@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import java.util.HashMap;
 import javafx.animation.PauseTransition;
 import javafx.util.Duration;
+import javafx.stage.Modality;
 
 
 import javafx.scene.Scene;
@@ -38,7 +39,7 @@ public class JavaFXTemplate extends Application {
 //	private Player playerTwo;
 //	private Dealer theDealer;
 
-	Button start, exit, Options;
+	Button start, exit, Options,optionsButton,freshStartButton,newLookButton,rulesButton,winningHandsButton,exitButton;
 	Label intro, authors;
 	VBox root;
 	HashMap<String, Scene> sceneMap= new HashMap<String, Scene>();
@@ -56,20 +57,49 @@ public class JavaFXTemplate extends Application {
 //	public void newLook(){}
 //	public void quitGame(){}
 //	public void showRules(){}
+	public void optionsMenu(Stage primaryStage){
+		Stage optionsStage = new Stage();
+		optionsStage.initModality(Modality.APPLICATION_MODAL);//sets modality to pause all other windows until its closed
+		optionsStage.initOwner(primaryStage);//primarystage (game window) is owner of the options stage so it will always stay on top of primary stage window
 
-	public Scene optionsScreen(Stage primryStage){
-		BorderPane rootPane = new BorderPane();
-		rootPane.setStyle("-fx-background-color: #FFFFFF;"); // Optional styling
+		BorderPane optionsRoot = new BorderPane();//holds all other ui elems in scene
+		Label optionsLabel = new Label("Options Menu");
 
-		// Add some content to the options screen (e.g., a label)
-		Label optionsLabel = new Label("Options Screen");
-		optionsLabel.setStyle("-fx-font-size: 20; -fx-text-fill: black;");
-		rootPane.setCenter(optionsLabel); // Center the label in the options screen
+		optionsButton = new Button("options");
+		freshStartButton = new Button("fresh start");
+		newLookButton = new Button("new look");
+		rulesButton = new Button("rules");
+		winningHandsButton = new Button("winning hands");
+		exitButton = new Button("exit >:(");
 
+		// Set button widths for consistency
+		optionsButton.setMinWidth(200);
+		freshStartButton.setMinWidth(200);
+		newLookButton.setMinWidth(200);
+		rulesButton.setMinWidth(200);
+		winningHandsButton.setMinWidth(200);
+		exitButton.setMinWidth(200);
 
-		Scene scene = new Scene(rootPane, 1000, 1000);
-		return scene;
+		// Define actions for the buttons
+		optionsButton.setOnAction(e -> System.out.println("Options clicked"));
+		freshStartButton.setOnAction(e -> System.out.println("Fresh Start clicked"));
+		newLookButton.setOnAction(e -> System.out.println("New Look clicked"));
+		rulesButton.setOnAction(e -> System.out.println("Rules clicked"));
+		winningHandsButton.setOnAction(e -> System.out.println("Winning Hands clicked"));
+		exitButton.setOnAction(e -> optionsStage.close());
+
+		// Add buttons to the VBox and set alignment
+		VBox optionsContent = new VBox(10, optionsButton, freshStartButton, newLookButton, rulesButton, winningHandsButton, exitButton);
+		optionsContent.setAlignment(Pos.CENTER);
+		optionsContent.setPadding(new Insets(20)); // Add padding for aesthetics
+		optionsRoot.setCenter(optionsContent);
+
+		Scene optionsScene = new Scene(optionsRoot, 300, 400);
+		optionsStage.setScene(optionsScene);
+		optionsStage.showAndWait();
+
 	}
+
 	public Scene startNewGame(Stage primaryStage) {
 
 		// Create the Options button
@@ -116,7 +146,7 @@ public class JavaFXTemplate extends Application {
 		rootPane.setTop(optionsBox); // Place Options button in the top right
 		rootPane.setCenter(pane); // Place the game layout pane in the center
 
-		Options.setOnAction(e -> primaryStage.setScene(sceneMap.get("OptionsScreen")));
+		Options.setOnAction(e -> optionsMenu(primaryStage));//does return scene only opens modal
 
 		// Create and return the scene
 		Scene scene = new Scene(rootPane, 1000, 1000);
@@ -202,7 +232,6 @@ public class JavaFXTemplate extends Application {
 
 		sceneMap.put("welcomeScreen", createWelcomeScreen(primaryStage));
 		sceneMap.put("game", startNewGame(primaryStage));
-		sceneMap.put("OptionsScreen",optionsScreen(primaryStage));
 
 		primaryStage.setScene(sceneMap.get("welcomeScreen")); //change this
 		primaryStage.show();

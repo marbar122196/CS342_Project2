@@ -98,6 +98,7 @@ public class JavaFXTemplate extends Application {
 		playPlayerOne.setEditable(false);
 		playPlayerTwo.setEditable(false);
 
+<<<<<<< Updated upstream
 		// Player 1 bets VBox
 		VBox betsPlayerOne = new VBox(10, playPlayerOne, antePlayerOne, pairPlusPlayerOne);
 		betsPlayerOne.setLayoutX(100);  // Set the x-coordinate for player one's VBox
@@ -110,6 +111,11 @@ public class JavaFXTemplate extends Application {
 
 		// Add the player VBoxes to the Pane
 		pane.getChildren().addAll(betsPlayerOne, betsPlayerTwo);
+=======
+
+		VBox betsPlayerOne = new VBox(playPlayerOne, antePlayerOne, pairPlusPlayerOne);
+		VBox betsPlayerTwo = new VBox(playPlayerTwo, antePlayerTwo, pairPlusPlayerTwo);
+>>>>>>> Stashed changes
 
 		// Use a BorderPane as the root layout and add the HBox and Pane
 		BorderPane rootPane = new BorderPane();

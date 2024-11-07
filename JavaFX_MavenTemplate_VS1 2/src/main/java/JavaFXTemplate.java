@@ -206,7 +206,7 @@ public void winningHands(Stage optionsStage) {
 		BorderPane optionsRoot = new BorderPane();//holds all other ui elems in scene
 		Label optionsLabel = new Label("Options Menu");
 
-		optionsButton = new Button("options");
+//		optionsButton = new Button("options");
 		freshStartButton = new Button("fresh start");
 		newLookButton = new Button("new look");
 		rulesButton = new Button("rules");
@@ -214,7 +214,7 @@ public void winningHands(Stage optionsStage) {
 		exitButton = new Button("exit >:(");
 
 		// Set button widths for consistency
-		optionsButton.setMinWidth(200);
+//		optionsButton.setMinWidth(200);
 		freshStartButton.setMinWidth(200);
 		newLookButton.setMinWidth(200);
 		rulesButton.setMinWidth(200);
@@ -222,7 +222,7 @@ public void winningHands(Stage optionsStage) {
 		exitButton.setMinWidth(200);
 
 		// Define actions for the buttons
-		optionsButton.setOnAction(e -> System.out.println("Options clicked"));
+//		optionsButton.setOnAction(e -> System.out.println("Options clicked"));
 		freshStartButton.setOnAction(e -> System.out.println("Fresh Start clicked"));
 		newLookButton.setOnAction(e -> System.out.println("New Look clicked"));
 		rulesButton.setOnAction(e -> rules(optionsStage));
@@ -230,12 +230,12 @@ public void winningHands(Stage optionsStage) {
 		exitButton.setOnAction(e -> exitScreen(optionsStage));
 
 		// Add buttons to the VBox and set alignment
-		VBox optionsContent = new VBox(10, optionsButton, freshStartButton, newLookButton, rulesButton, winningHandsButton, exitButton);
+		VBox optionsContent = new VBox(10, freshStartButton, newLookButton, rulesButton, winningHandsButton, exitButton);
 		optionsContent.setAlignment(Pos.CENTER);
 		optionsContent.setPadding(new Insets(20)); // Add padding for aesthetics
 		optionsRoot.setCenter(optionsContent);
 
-		Scene optionsScene = new Scene(optionsRoot, 300, 400);
+		Scene optionsScene = new Scene(optionsRoot, 250, 300);
 		optionsStage.setScene(optionsScene);
 		optionsStage.showAndWait();
 

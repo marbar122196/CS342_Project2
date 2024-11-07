@@ -25,11 +25,11 @@ public class Dealer {
         return dealersHand;
     }
 
-    public static Deck getDeck(){
+    public Deck getDeck(){
         return theDeck;
     }
 
-    public static ArrayList<Card> dealPlayerHand(Deck theDeck){
+    public ArrayList<Card> dealPlayerHand(){
         //should I add a check here for the amount of cards? or just leave it. ask coda
 
         ArrayList<Card> playerHand = new ArrayList<>();
@@ -40,6 +40,10 @@ public class Dealer {
         }
 
         return playerHand;
+    }
+
+    public void setPlayerHand(Player player){
+        player.setHand(dealPlayerHand());
     }
 
 }

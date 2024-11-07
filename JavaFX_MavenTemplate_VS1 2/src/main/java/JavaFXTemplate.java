@@ -12,6 +12,7 @@ import javafx.util.Duration;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -28,6 +29,7 @@ import javafx.geometry.Pos;
 import javafx.scene.layout.Region;
 import javafx.animation.PauseTransition;
 import javafx.application.Platform;
+import javafx.scene.layout.ColumnConstraints;
 
 
 public class JavaFXTemplate extends Application {
@@ -36,7 +38,7 @@ public class JavaFXTemplate extends Application {
 //	private Player playerTwo;
 //	private Dealer theDealer;
 
-	Button start, exit;
+	Button start, exit, Options;
 	Label intro, authors;
 	VBox root;
 	HashMap<String, Scene> sceneMap= new HashMap<String, Scene>();
@@ -54,12 +56,41 @@ public class JavaFXTemplate extends Application {
 //	public void newLook(){}
 //	public void quitGame(){}
 //	public void showRules(){}
-	public Scene startNewGame(){
-		BorderPane pane = new BorderPane(); // idk if a borderpan is the best option here but
+
+	public Scene optionsScreen(Stage primryStage){
+		BorderPane rootPane = new BorderPane();
+		rootPane.setStyle("-fx-background-color: #FFFFFF;"); // Optional styling
+
+		// Add some content to the options screen (e.g., a label)
+		Label optionsLabel = new Label("Options Screen");
+		optionsLabel.setStyle("-fx-font-size: 20; -fx-text-fill: black;");
+		rootPane.setCenter(optionsLabel); // Center the label in the options screen
+
+
+		Scene scene = new Scene(rootPane, 1000, 1000);
+		return scene;
+	}
+	public Scene startNewGame(Stage primaryStage) {
+
+		// Create the Options button
+		Options = new Button("Options");
+		Options.setMinWidth(100);
+		Options.setPrefHeight(20);
+
+		// Create an HBox to hold the Options button and align it to the right
+		HBox optionsBox = new HBox(Options);
+		optionsBox.setAlignment(Pos.TOP_RIGHT);
+		optionsBox.setPadding(new Insets(10)); // Optional padding for spacing
+
+		// Create a Pane for the player fields and layout
+		Pane pane = new Pane();
+
+		// Text fields for player 1
 		TextField playPlayerOne = new TextField();
 		TextField antePlayerOne = new TextField();
 		TextField pairPlusPlayerOne = new TextField();
 
+		// Text fields for player 2
 		TextField playPlayerTwo = new TextField();
 		TextField antePlayerTwo = new TextField();
 		TextField pairPlusPlayerTwo = new TextField();
@@ -67,15 +98,33 @@ public class JavaFXTemplate extends Application {
 		playPlayerOne.setEditable(false);
 		playPlayerTwo.setEditable(false);
 
-		VBox betsPlayerOne = new VBox(playPlayerOne, antePlayerOne, pairPlusPlayerOne);
-		VBox betsPlayerTwo = new VBox(playPlayerTwo, antePlayerTwo, pairPlusPlayerTwo);
+		// Player 1 bets VBox
+		VBox betsPlayerOne = new VBox(10, playPlayerOne, antePlayerOne, pairPlusPlayerOne);
+		betsPlayerOne.setLayoutX(100);  // Set the x-coordinate for player one's VBox
+		betsPlayerOne.setLayoutY(200);  // Set the y-coordinate for player one's VBox
 
-		pane.setLeft(betsPlayerOne);
-		pane.setRight(betsPlayerTwo);
+		// Player 2 bets VBox
+		VBox betsPlayerTwo = new VBox(10, playPlayerTwo, antePlayerTwo, pairPlusPlayerTwo);
+		betsPlayerTwo.setLayoutX(700);  // Set the x-coordinate for player two's VBox
+		betsPlayerTwo.setLayoutY(200);  // Set the y-coordinate for player two's VBox
 
-		Scene scene = new Scene(pane, 500, 400);
+		// Add the player VBoxes to the Pane
+		pane.getChildren().addAll(betsPlayerOne, betsPlayerTwo);
+
+		// Use a BorderPane as the root layout and add the HBox and Pane
+		BorderPane rootPane = new BorderPane();
+		rootPane.setTop(optionsBox); // Place Options button in the top right
+		rootPane.setCenter(pane); // Place the game layout pane in the center
+
+		Options.setOnAction(e -> primaryStage.setScene(sceneMap.get("OptionsScreen")));
+
+		// Create and return the scene
+		Scene scene = new Scene(rootPane, 1000, 1000);
 		return scene;
 	}
+
+
+
 
 	public Scene createWelcomeScreen(Stage primaryStage){
 		BorderPane outerPane = new BorderPane();
@@ -152,7 +201,8 @@ public class JavaFXTemplate extends Application {
 //		}
 
 		sceneMap.put("welcomeScreen", createWelcomeScreen(primaryStage));
-		sceneMap.put("game", startNewGame());
+		sceneMap.put("game", startNewGame(primaryStage));
+		sceneMap.put("OptionsScreen",optionsScreen(primaryStage));
 
 		primaryStage.setScene(sceneMap.get("welcomeScreen")); //change this
 		primaryStage.show();

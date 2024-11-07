@@ -60,6 +60,44 @@ public class JavaFXTemplate extends Application {
 //	public void newLook(){}
 //	public void quitGame(){}
 //	public void showRules(){}
+public void exitScreen(Stage optionsStage) {
+	// stage for exit
+	Stage exitStage = new Stage();
+	exitStage.initModality(Modality.APPLICATION_MODAL);
+	exitStage.initOwner(optionsStage);
+
+	// title
+	Label exitScreenTitle = new Label("return to game?");
+	exitScreenTitle.setFont(Font.font(customFont.getFamily(), titleSize));
+	exitScreenTitle.setStyle("-fx-text-fill: #A30262; -fx-text-alignment: center;");
+
+	//yesno buttons
+	Button yesButton = new Button("yes<3");
+	yesButton.setFont(customFont);
+	yesButton.setStyle(" -fx-text-fill: #A30262;");
+	yesButton.setOnAction(e -> optionsStage.close());
+
+	Button noButton = new Button("no</3");
+	noButton.setFont(customFont);
+	noButton.setStyle(" -fx-text-fill: #A30262;");
+	noButton.setOnAction(e -> Platform.exit()); //have to change to platform instead of primarystage bc ooptionstage is passed in
+
+	// layout
+	HBox buttonBox = new HBox(50, yesButton, noButton); // Space between buttons
+	buttonBox.setAlignment(Pos.CENTER);
+
+	VBox exitScreenBox = new VBox(20, exitScreenTitle, buttonBox);
+	exitScreenBox.setAlignment(Pos.CENTER);
+	exitScreenBox.setPadding(new Insets(30));
+	exitScreenBox.setStyle("-fx-background-color: #FFFFFF; -fx-border-color: #A30262; -fx-border-width: 15px;");
+
+	// make scene
+	Scene exitScene = new Scene(exitScreenBox, 500, 250);
+	exitStage.setScene(exitScene);
+	exitStage.showAndWait();
+}
+
+
 public void winningHands(Stage optionsStage) {
 	// Ccreatge stage for winning hands modal
 	Stage winningHandsStage = new Stage();
@@ -189,7 +227,7 @@ public void winningHands(Stage optionsStage) {
 		newLookButton.setOnAction(e -> System.out.println("New Look clicked"));
 		rulesButton.setOnAction(e -> rules(optionsStage));
 		winningHandsButton.setOnAction(e -> winningHands(optionsStage));
-		exitButton.setOnAction(e -> optionsStage.close());
+		exitButton.setOnAction(e -> exitScreen(optionsStage));
 
 		// Add buttons to the VBox and set alignment
 		VBox optionsContent = new VBox(10, optionsButton, freshStartButton, newLookButton, rulesButton, winningHandsButton, exitButton);

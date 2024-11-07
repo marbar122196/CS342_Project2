@@ -8,7 +8,7 @@ import java.util.HashMap;
 import javafx.animation.PauseTransition;
 import javafx.util.Duration;
 import javafx.stage.Modality;
-
+import javafx.scene.text.Font;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;

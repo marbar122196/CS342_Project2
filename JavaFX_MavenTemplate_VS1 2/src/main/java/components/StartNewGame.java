@@ -21,7 +21,7 @@ public class StartNewGame {
     private int bodySize;
     private Scene scene;
 
-    public StartNewGame(Font customFont, int titleSize, int bodySize, Stage primaryStage) {
+    public StartNewGame(Font customFont, int titleSize, int bodySize, Stage primaryStage, Player playerOne, Player playerTwo, Dealer theDealer) {
         this.customFont = customFont;
         this.titleSize = titleSize;
         this.bodySize = bodySize;
@@ -95,17 +95,17 @@ public class StartNewGame {
         contentsPlayerTwo.setLayoutY(310);
 
         //should we do thing single cards so that it can flip one at a time as a transition?
-        Image p1c1 = new Image(getClass().getResourceAsStream("/faceDown.png"));
+        Image p1c1 = new Image(getClass().getResourceAsStream("/facedown.png"));
         ImageView p1c1Image1 = new ImageView(p1c1);
         p1c1Image1.setFitWidth(100);
         p1c1Image1.setFitHeight(100);
 
-        Image p1c2 = new Image(getClass().getResourceAsStream("/faceDown.png"));
+        Image p1c2 = new Image(getClass().getResourceAsStream("/facedown.png"));
         ImageView p1c1Image2 = new ImageView(p1c2);
         p1c1Image2.setFitWidth(100);
         p1c1Image2.setFitHeight(100);
 
-        Image p1c3 = new Image(getClass().getResourceAsStream("/faceDown.png"));
+        Image p1c3 = new Image(getClass().getResourceAsStream("/facedown.png"));
         ImageView p1c1Image3 = new ImageView(p1c3);
         p1c1Image3.setFitWidth(100);
         p1c1Image3.setFitHeight(100);

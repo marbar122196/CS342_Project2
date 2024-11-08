@@ -15,6 +15,9 @@ public class JavaFXTemplate extends Application {
     private Font customFont = Font.loadFont(getClass().getResourceAsStream("/DotGothic16-Regular.ttf"), 20);
     private int titleSize = 30;
     private int bodySize = 20;
+    Player playerOne;
+    Player playerTwo;
+    Dealer theDealer;
 
     public static void main(String[] args) {
         launch(args);
@@ -23,11 +26,14 @@ public class JavaFXTemplate extends Application {
     @Override
     public void start(Stage primaryStage) {
         primaryStage.setTitle("Three Card Poker");
+        theDealer = new Dealer();
+        playerOne = new Player();
+        playerTwo = new Player();
 
         WelcomeScreen welcomeScreen = new WelcomeScreen(customFont, primaryStage, () -> primaryStage.setScene(sceneMap.get("game")));
         sceneMap.put("welcomeScreen", welcomeScreen.getScene());
 
-        StartNewGame startNewGame = new StartNewGame(customFont, titleSize, bodySize, primaryStage);
+        StartNewGame startNewGame = new StartNewGame(customFont, titleSize, bodySize, primaryStage, playerOne, playerTwo, theDealer);
         sceneMap.put("game", startNewGame.getScene());
 
         primaryStage.setScene(sceneMap.get("welcomeScreen"));

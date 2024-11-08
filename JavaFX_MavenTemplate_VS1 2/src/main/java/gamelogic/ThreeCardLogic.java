@@ -1,3 +1,5 @@
+package gamelogic;
+
 import java.util.Map;
 import java.util.Arrays;
 import java.util.Collections;

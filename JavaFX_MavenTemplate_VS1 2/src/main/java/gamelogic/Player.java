@@ -1,3 +1,5 @@
+package gamelogic;
+
 import java.util.ArrayList;
 
 public class Player{
@@ -12,9 +14,6 @@ public class Player{
         hand = new ArrayList<>();
     }
 
-    public void setHand(ArrayList<Card> hand){
-        this.hand = hand;
-    }
 
 //    public void resetWinnings(){}
 //    public boolean lockInBets(){}

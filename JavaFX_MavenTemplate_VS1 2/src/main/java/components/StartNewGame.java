@@ -1,4 +1,6 @@
 package components;
+//package gamelogic;
+import gamelogic.*;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;

@@ -94,12 +94,6 @@ public class StartNewGame {
         contentsPlayerTwo.setLayoutX(530);
         contentsPlayerTwo.setLayoutY(310);
 
-
-
-        pane.getChildren().addAll(betsPlayerOne, betsPlayerTwo, contentsPlayerOne, contentsPlayerTwo);
-        betsPlayerOne.setLayoutX(100);
-        betsPlayerOne.setLayoutY(200);
-
         //should we do thing single cards so that it can flip one at a time as a transition?
         Image p1c1 = new Image(getClass().getResourceAsStream("/faceDown.png"));
         ImageView p1c1Image1 = new ImageView(p1c1);
@@ -122,11 +116,7 @@ public class StartNewGame {
         p1CardsHolder.setLayoutX(300);
         p1CardsHolder.setLayoutY(200);
 
-        VBox betsPlayerTwo = new VBox(10, playPlayerTwo, antePlayerTwo, pairPlusPlayerTwo);
-        betsPlayerTwo.setLayoutX(700);
-        betsPlayerTwo.setLayoutY(200);
-
-        pane.getChildren().addAll(betsPlayerOne, betsPlayerTwo,p1CardsHolder);
+        pane.getChildren().addAll(betsPlayerOne, betsPlayerTwo, contentsPlayerOne, contentsPlayerTwo, p1CardsHolder);
 
         BorderPane rootPane = new BorderPane();
         rootPane.setTop(optionsBox);

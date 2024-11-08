@@ -30,24 +30,70 @@ public class StartNewGame {
         optionsBox.setPadding(new Insets(10));
 
         Pane pane = new Pane();
+
+        // Text fields for player 1
         TextField playPlayerOne = new TextField();
         TextField antePlayerOne = new TextField();
         TextField pairPlusPlayerOne = new TextField();
+        TextField namePlayerOne = new TextField();
+        namePlayerOne.setPromptText("Enter name here: ");
+
+        //Buttons for Player 1
+        Button playerOneDeal = new Button("deal");
+        Button playerOneFold = new Button("fold");
+
+        // Text fields for player 2
         TextField playPlayerTwo = new TextField();
         TextField antePlayerTwo = new TextField();
         TextField pairPlusPlayerTwo = new TextField();
+        TextField namePlayerTwo = new TextField();
+        namePlayerTwo.setPromptText("Enter name here: ");
+
+
+        //Buttons for Player 2
+        Button playerTwoDeal = new Button("deal");
+        Button playerTwoFold = new Button("fold");
 
         playPlayerOne.setEditable(false);
         playPlayerTwo.setEditable(false);
 
+        // Player 1 bets VBox
         VBox betsPlayerOne = new VBox(10, playPlayerOne, antePlayerOne, pairPlusPlayerOne);
-        betsPlayerOne.setLayoutX(100);
-        betsPlayerOne.setLayoutY(200);
-        VBox betsPlayerTwo = new VBox(10, playPlayerTwo, antePlayerTwo, pairPlusPlayerTwo);
-        betsPlayerTwo.setLayoutX(700);
-        betsPlayerTwo.setLayoutY(200);
+        betsPlayerOne.setLayoutX(100);  // Set the x-coordinate for player one's VBox
+        betsPlayerOne.setLayoutY(300);  // Set the y-coordinate for player one's VBox
 
-        pane.getChildren().addAll(betsPlayerOne, betsPlayerTwo);
+
+        //Player 1 buttons Hbox
+        HBox buttonPlayerOne = new HBox(10, playerOneDeal, playerOneFold);
+//        buttonPlayerOne.setLayoutX(260);
+//        buttonPlayerOne.setLayoutY(350);
+
+        //Player 1 contents VBox
+        VBox contentsPlayerOne = new VBox(30, namePlayerOne, buttonPlayerOne);
+        contentsPlayerOne.setLayoutX(260);
+        contentsPlayerOne.setLayoutY(310);
+
+
+        // Player 2 bets VBox
+        VBox betsPlayerTwo = new VBox(10, playPlayerTwo, antePlayerTwo, pairPlusPlayerTwo);
+        betsPlayerTwo.setLayoutX(700);  // Set the x-coordinate for player two's VBox
+        betsPlayerTwo.setLayoutY(300);  // Set the y-coordinate for player two's VBox
+
+
+        //Player 2 buttons HBox
+        HBox buttonPlayerTwo = new HBox(10, playerTwoDeal, playerTwoFold);
+//        buttonPlayerTwo.setLayoutX(600);
+//        buttonPlayerTwo.setLayoutY(350);
+
+
+        //Player 2 contents Vboc
+        VBox contentsPlayerTwo = new VBox(30, namePlayerTwo, buttonPlayerTwo);
+        contentsPlayerTwo.setLayoutX(530);
+        contentsPlayerTwo.setLayoutY(310);
+
+
+
+        pane.getChildren().addAll(betsPlayerOne, betsPlayerTwo, contentsPlayerOne, contentsPlayerTwo);
 
         BorderPane rootPane = new BorderPane();
         rootPane.setTop(optionsBox);

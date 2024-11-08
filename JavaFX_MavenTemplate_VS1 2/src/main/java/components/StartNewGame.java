@@ -32,12 +32,25 @@ public class StartNewGame {
         this.titleSize = titleSize;
         this.bodySize = bodySize;
 
-
         Button optionsButton = new Button("Options");
         optionsButton.setMinWidth(100);
         HBox optionsBox = new HBox(optionsButton);
         optionsBox.setAlignment(Pos.TOP_RIGHT);
         optionsBox.setPadding(new Insets(10));
+
+        TextField gameCommentary = new TextField();
+        gameCommentary.setMinWidth(350);
+        gameCommentary.setMinHeight(150);
+        gameCommentary.setLayoutX(575);
+        gameCommentary.setLayoutY(500);
+
+
+        Button dealGame = new Button("deal");
+        dealGame.setFont(customFont);
+        dealGame.setMinWidth(240);
+        dealGame.setMinHeight(50);
+        dealGame.setLayoutX(625);
+        dealGame.setLayoutY(300);
 
         Pane pane = new Pane();
 
@@ -45,28 +58,39 @@ public class StartNewGame {
         dealer.setFont(customFont);
         dealer.setMinWidth(300);
 
+        //positions for deck, player 1, and player 2
+        double deckDealerX = 625, dealerDeckY = 100;
+        double playerOneX = 260, playerOneY = 440;
+        double playerTwoX = 1000, playerTwoY = 440;
+
         // Text fields for player 1
         TextField playPlayerOne = new TextField();
         TextField antePlayerOne = new TextField();
         TextField pairPlusPlayerOne = new TextField();
+        Label winningsPlayerOne = new Label("Winnings");
         TextField namePlayerOne = new TextField();
         namePlayerOne.setPromptText("Enter name here: ");
 
         //Buttons for Player 1
-        Button playerOneDeal = new Button("deal");
+        Button playerOnePlay = new Button("play");
+        playerOnePlay.setMinWidth(75);
         Button playerOneFold = new Button("fold");
+        playerOneFold.setMinWidth(75);
 
         // Text fields for player 2
         TextField playPlayerTwo = new TextField();
         TextField antePlayerTwo = new TextField();
         TextField pairPlusPlayerTwo = new TextField();
+        TextField winningsPlayerTwo = new TextField();
         TextField namePlayerTwo = new TextField();
         namePlayerTwo.setPromptText("Enter name here: ");
 
 
         //Buttons for Player 2
-        Button playerTwoDeal = new Button("deal");
+        Button playerTwoPlay = new Button("play");
+        playerTwoPlay.setMinWidth(75);
         Button playerTwoFold = new Button("fold");
+        playerTwoFold.setMinWidth(75);
 
         playPlayerOne.setEditable(false);
         playPlayerTwo.setEditable(false);
@@ -76,10 +100,16 @@ public class StartNewGame {
         betsPlayerOne.setLayoutX(100);  // Set the x-coordinate for player one's VBox
         betsPlayerOne.setLayoutY(500);  // Set the y-coordinate for player one's VBox
 
+        Region r1 = new Region();
+        r1.setMinWidth(25);
+
         //Player 1 buttons Hbox
-        HBox buttonPlayerOne = new HBox(10, playerOneDeal, playerOneFold);
+        HBox buttonPlayerOne = new HBox(10, r1, playerOnePlay, playerOneFold);
 //        buttonPlayerOne.setLayoutX(260);
 //        buttonPlayerOne.setLayoutY(350);
+
+        Region r2 = new Region();
+        r2.setMinWidth(25);
 
         // Player 2 bets VBox
         VBox betsPlayerTwo = new VBox(10, playPlayerTwo, antePlayerTwo, pairPlusPlayerTwo);
@@ -87,14 +117,14 @@ public class StartNewGame {
         betsPlayerTwo.setLayoutY(500);  // Set the y-coordinate for player two's VBox
 
         //Player 2 buttons HBox
-        HBox buttonPlayerTwo = new HBox(10, playerTwoDeal, playerTwoFold);
+        HBox buttonPlayerTwo = new HBox(10, r2, playerTwoPlay, playerTwoFold);
 //        buttonPlayerTwo.setLayoutX(600);
 //        buttonPlayerTwo.setLayoutY(350);
 
-        Region r1 = new Region();
-        r1.setMinWidth(75);
+        Region r3 = new Region();
+        r3.setMinWidth(75);
 
-        HBox dealerContents = new HBox(10, r1, dealer);
+        HBox dealerContents = new HBox(10, r3, dealer);
 
         //this needs to happen every round so we can get new cards
        theDealer.dealPlayer(playerOne);
@@ -186,7 +216,7 @@ public class StartNewGame {
         dealerVBox.setLayoutX(625);
         dealerVBox.setLayoutY(100);
 
-        pane.getChildren().addAll(betsPlayerOne, betsPlayerTwo, contentsPlayerOne, contentsPlayerTwo, dealerVBox);
+        pane.getChildren().addAll(betsPlayerOne, betsPlayerTwo, contentsPlayerOne, contentsPlayerTwo, dealerVBox, dealGame, gameCommentary);
 
         BorderPane rootPane = new BorderPane();
         rootPane.setTop(optionsBox);

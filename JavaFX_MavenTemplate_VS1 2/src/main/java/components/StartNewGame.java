@@ -15,6 +15,8 @@ import javafx.stage.Stage;
 import javafx.scene.text.Font;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.control.Label;
+import javafx.scene.layout.Region;
 
 import java.util.ArrayList;
 
@@ -38,6 +40,10 @@ public class StartNewGame {
         optionsBox.setPadding(new Insets(10));
 
         Pane pane = new Pane();
+
+        Label dealer = new Label("dealer");
+        dealer.setFont(customFont);
+        dealer.setMinWidth(300);
 
         // Text fields for player 1
         TextField playPlayerOne = new TextField();
@@ -70,25 +76,25 @@ public class StartNewGame {
         betsPlayerOne.setLayoutX(100);  // Set the x-coordinate for player one's VBox
         betsPlayerOne.setLayoutY(500);  // Set the y-coordinate for player one's VBox
 
-
         //Player 1 buttons Hbox
         HBox buttonPlayerOne = new HBox(10, playerOneDeal, playerOneFold);
 //        buttonPlayerOne.setLayoutX(260);
 //        buttonPlayerOne.setLayoutY(350);
-
-
 
         // Player 2 bets VBox
         VBox betsPlayerTwo = new VBox(10, playPlayerTwo, antePlayerTwo, pairPlusPlayerTwo);
         betsPlayerTwo.setLayoutX(1250);  // Set the x-coordinate for player two's VBox
         betsPlayerTwo.setLayoutY(500);  // Set the y-coordinate for player two's VBox
 
-
         //Player 2 buttons HBox
         HBox buttonPlayerTwo = new HBox(10, playerTwoDeal, playerTwoFold);
 //        buttonPlayerTwo.setLayoutX(600);
 //        buttonPlayerTwo.setLayoutY(350);
 
+        Region r1 = new Region();
+        r1.setMinWidth(75);
+
+        HBox dealerContents = new HBox(10, r1, dealer);
 
         //this needs to happen every round so we can get new cards
        theDealer.dealPlayer(playerOne);
@@ -142,8 +148,24 @@ public class StartNewGame {
         p2c3Image3.setFitWidth(75);
         p2c3Image3.setFitHeight(75);
 
+        Image dc1 = new Image(getClass().getResourceAsStream("/facedown.png"));
+        ImageView dc1Image1 = new ImageView(dc1);
+        dc1Image1.setFitWidth(75);
+        dc1Image1.setFitHeight(75);
+
+        Image dc2 = new Image(getClass().getResourceAsStream("/facedown.png"));
+        ImageView dc2Image2 = new ImageView(dc2);
+        dc2Image2.setFitWidth(75);
+        dc2Image2.setFitHeight(75);
+
+        Image dc3 = new Image(getClass().getResourceAsStream("/facedown.png"));
+        ImageView dc3Image3 = new ImageView(dc3);
+        dc3Image3.setFitWidth(75);
+        dc3Image3.setFitHeight(75);
+
         HBox deckOfCardsP1 = new HBox(5, p1c1Image1,p1c1Image2,p1c1Image3);
         HBox deckOfCardsP2 = new HBox(5, p2c1Image1, p2c2Image2, p2c3Image3);
+        HBox deckOfCardsD = new HBox(5, dc1Image1, dc2Image2, dc3Image3);
 
 //        VBox p1CardsHolder= new VBox(10, deckOfCardsP1);
 //        p1CardsHolder.setLayoutX(300);
@@ -159,7 +181,12 @@ public class StartNewGame {
         contentsPlayerTwo.setLayoutX(1000);
         contentsPlayerTwo.setLayoutY(440);
 
-        pane.getChildren().addAll(betsPlayerOne, betsPlayerTwo, contentsPlayerOne, contentsPlayerTwo);
+        //Dealers contents VBox
+        VBox dealerVBox = new VBox(10, deckOfCardsD, dealerContents);
+        dealerVBox.setLayoutX(625);
+        dealerVBox.setLayoutY(100);
+
+        pane.getChildren().addAll(betsPlayerOne, betsPlayerTwo, contentsPlayerOne, contentsPlayerTwo, dealerVBox);
 
         BorderPane rootPane = new BorderPane();
         rootPane.setTop(optionsBox);

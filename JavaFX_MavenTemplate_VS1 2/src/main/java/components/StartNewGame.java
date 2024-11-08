@@ -16,6 +16,8 @@ import javafx.scene.text.Font;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+import java.util.ArrayList;
+
 
 public class StartNewGame {
     private Font customFont;
@@ -96,8 +98,8 @@ public class StartNewGame {
         contentsPlayerTwo.setLayoutX(530);
         contentsPlayerTwo.setLayoutY(310);
 
-        playerOne.dealPlayer();
-        playerTwo.dealPlayer();
+       theDealer.dealPlayer(playerOne);
+       theDealer.dealPlayer(playerTwo);
 
         ArrayList<Card> playerOneHand = playerOne.getHand();
         ArrayList<Card> playerTwoHand = playerTwo.getHand();

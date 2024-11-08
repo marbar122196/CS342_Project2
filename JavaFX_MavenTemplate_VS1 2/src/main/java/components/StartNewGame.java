@@ -68,6 +68,8 @@ public class StartNewGame {
         TextField antePlayerOne = new TextField();
         TextField pairPlusPlayerOne = new TextField();
         Label winningsPlayerOne = new Label("Winnings");
+        winningsPlayerOne.setFont(customFont);
+        TextField amtWinningsPlayerOne = new TextField();
         TextField namePlayerOne = new TextField();
         namePlayerOne.setPromptText("Enter name here: ");
 
@@ -81,7 +83,9 @@ public class StartNewGame {
         TextField playPlayerTwo = new TextField();
         TextField antePlayerTwo = new TextField();
         TextField pairPlusPlayerTwo = new TextField();
-        TextField winningsPlayerTwo = new TextField();
+        Label winningsPlayerTwo = new Label("Winnings");
+        winningsPlayerTwo.setFont(customFont);
+        TextField amtWinningsPlayerTwo = new TextField();
         TextField namePlayerTwo = new TextField();
         namePlayerTwo.setPromptText("Enter name here: ");
 
@@ -96,7 +100,7 @@ public class StartNewGame {
         playPlayerTwo.setEditable(false);
 
         // Player 1 bets VBox
-        VBox betsPlayerOne = new VBox(10, playPlayerOne, antePlayerOne, pairPlusPlayerOne);
+        VBox betsPlayerOne = new VBox(10, playPlayerOne, antePlayerOne, pairPlusPlayerOne, winningsPlayerOne, amtWinningsPlayerOne);
         betsPlayerOne.setLayoutX(100);  // Set the x-coordinate for player one's VBox
         betsPlayerOne.setLayoutY(500);  // Set the y-coordinate for player one's VBox
 
@@ -112,7 +116,7 @@ public class StartNewGame {
         r2.setMinWidth(25);
 
         // Player 2 bets VBox
-        VBox betsPlayerTwo = new VBox(10, playPlayerTwo, antePlayerTwo, pairPlusPlayerTwo);
+        VBox betsPlayerTwo = new VBox(10, playPlayerTwo, antePlayerTwo, pairPlusPlayerTwo, winningsPlayerTwo, amtWinningsPlayerTwo);
         betsPlayerTwo.setLayoutX(1250);  // Set the x-coordinate for player two's VBox
         betsPlayerTwo.setLayoutY(500);  // Set the y-coordinate for player two's VBox
 
@@ -224,7 +228,7 @@ public class StartNewGame {
 
         optionsButton.setOnAction(e -> new OptionsMenu(customFont, titleSize, bodySize).show(primaryStage));
 
-        this.scene = new Scene(rootPane, 1500, 1000);
+        this.scene = new Scene(rootPane, 1500, 800);
     }
 
     public Scene getScene() {

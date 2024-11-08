@@ -11,6 +11,9 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.scene.text.Font;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+
 
 public class StartNewGame {
     private Font customFont;
@@ -33,6 +36,7 @@ public class StartNewGame {
         TextField playPlayerOne = new TextField();
         TextField antePlayerOne = new TextField();
         TextField pairPlusPlayerOne = new TextField();
+
         TextField playPlayerTwo = new TextField();
         TextField antePlayerTwo = new TextField();
         TextField pairPlusPlayerTwo = new TextField();
@@ -43,11 +47,34 @@ public class StartNewGame {
         VBox betsPlayerOne = new VBox(10, playPlayerOne, antePlayerOne, pairPlusPlayerOne);
         betsPlayerOne.setLayoutX(100);
         betsPlayerOne.setLayoutY(200);
+
+        //should we do thing single cards so that it can flip one at a time as a transition?
+        Image p1c1 = new Image(getClass().getResourceAsStream("/faceDown.png"));
+        ImageView p1c1Image1 = new ImageView(p1c1);
+        p1c1Image1.setFitWidth(100);
+        p1c1Image1.setFitHeight(100);
+
+        Image p1c2 = new Image(getClass().getResourceAsStream("/faceDown.png"));
+        ImageView p1c1Image2 = new ImageView(p1c2);
+        p1c1Image2.setFitWidth(100);
+        p1c1Image2.setFitHeight(100);
+
+        Image p1c3 = new Image(getClass().getResourceAsStream("/faceDown.png"));
+        ImageView p1c1Image3 = new ImageView(p1c3);
+        p1c1Image3.setFitWidth(100);
+        p1c1Image3.setFitHeight(100);
+
+        HBox deckOfCardsP1 = new HBox(5, p1c1Image1,p1c1Image2,p1c1Image3);
+
+        VBox p1CardsHolder= new VBox(10, deckOfCardsP1);
+        p1CardsHolder.setLayoutX(300);
+        p1CardsHolder.setLayoutY(200);
+
         VBox betsPlayerTwo = new VBox(10, playPlayerTwo, antePlayerTwo, pairPlusPlayerTwo);
         betsPlayerTwo.setLayoutX(700);
         betsPlayerTwo.setLayoutY(200);
 
-        pane.getChildren().addAll(betsPlayerOne, betsPlayerTwo);
+        pane.getChildren().addAll(betsPlayerOne, betsPlayerTwo,p1CardsHolder);
 
         BorderPane rootPane = new BorderPane();
         rootPane.setTop(optionsBox);

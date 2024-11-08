@@ -30,6 +30,7 @@ public class StartNewGame {
         this.titleSize = titleSize;
         this.bodySize = bodySize;
 
+
         Button optionsButton = new Button("Options");
         optionsButton.setMinWidth(100);
         HBox optionsBox = new HBox(optionsButton);
@@ -67,7 +68,7 @@ public class StartNewGame {
         // Player 1 bets VBox
         VBox betsPlayerOne = new VBox(10, playPlayerOne, antePlayerOne, pairPlusPlayerOne);
         betsPlayerOne.setLayoutX(100);  // Set the x-coordinate for player one's VBox
-        betsPlayerOne.setLayoutY(300);  // Set the y-coordinate for player one's VBox
+        betsPlayerOne.setLayoutY(500);  // Set the y-coordinate for player one's VBox
 
 
         //Player 1 buttons Hbox
@@ -75,16 +76,12 @@ public class StartNewGame {
 //        buttonPlayerOne.setLayoutX(260);
 //        buttonPlayerOne.setLayoutY(350);
 
-        //Player 1 contents VBox
-        VBox contentsPlayerOne = new VBox(30, namePlayerOne, buttonPlayerOne);
-        contentsPlayerOne.setLayoutX(260);
-        contentsPlayerOne.setLayoutY(310);
 
 
         // Player 2 bets VBox
         VBox betsPlayerTwo = new VBox(10, playPlayerTwo, antePlayerTwo, pairPlusPlayerTwo);
-        betsPlayerTwo.setLayoutX(700);  // Set the x-coordinate for player two's VBox
-        betsPlayerTwo.setLayoutY(300);  // Set the y-coordinate for player two's VBox
+        betsPlayerTwo.setLayoutX(1250);  // Set the x-coordinate for player two's VBox
+        betsPlayerTwo.setLayoutY(500);  // Set the y-coordinate for player two's VBox
 
 
         //Player 2 buttons HBox
@@ -93,42 +90,76 @@ public class StartNewGame {
 //        buttonPlayerTwo.setLayoutY(350);
 
 
-        //Player 2 contents Vboc
-        VBox contentsPlayerTwo = new VBox(30, namePlayerTwo, buttonPlayerTwo);
-        contentsPlayerTwo.setLayoutX(530);
-        contentsPlayerTwo.setLayoutY(310);
-
+        //this needs to happen every round so we can get new cards
        theDealer.dealPlayer(playerOne);
        theDealer.dealPlayer(playerTwo);
 
+       //Actually grabs the hands for both players
         ArrayList<Card> playerOneHand = playerOne.getHand();
         ArrayList<Card> playerTwoHand = playerTwo.getHand();
 
+
+        //Converts PlayerOnes hands to strings to grab images
+        String playerOneCardOne = playerOneHand.get(0).getSuit() + " " + playerOneHand.get(0).getValue() + ".png";
+        String playerOneCardTwo = playerOneHand.get(1).getSuit() + " " + playerOneHand.get(1).getValue() + ".png";
+        String playerOneCardThree = playerOneHand.get(2).getSuit() + " " + playerOneHand.get(2).getValue() + ".png";
+
+
+        //Now doing the same thing but for PlayerTwo
+        String playerTwoCardOne = playerTwoHand.get(0).getSuit() + " " + playerTwoHand.get(0).getValue() + ".png";
+        String playerTwoCardTwo = playerTwoHand.get(1).getSuit() + " " + playerTwoHand.get(1).getValue() + ".png";
+        String playerTwoCardThree = playerTwoHand.get(2).getSuit() + " " + playerTwoHand.get(2).getValue() + ".png";
 
 
         //should we do thing single cards so that it can flip one at a time as a transition?
         Image p1c1 = new Image(getClass().getResourceAsStream("/facedown.png"));
         ImageView p1c1Image1 = new ImageView(p1c1);
-        p1c1Image1.setFitWidth(100);
-        p1c1Image1.setFitHeight(100);
+        p1c1Image1.setFitWidth(75);
+        p1c1Image1.setFitHeight(75);
 
         Image p1c2 = new Image(getClass().getResourceAsStream("/facedown.png"));
         ImageView p1c1Image2 = new ImageView(p1c2);
-        p1c1Image2.setFitWidth(100);
-        p1c1Image2.setFitHeight(100);
+        p1c1Image2.setFitWidth(75);
+        p1c1Image2.setFitHeight(75);
 
         Image p1c3 = new Image(getClass().getResourceAsStream("/facedown.png"));
         ImageView p1c1Image3 = new ImageView(p1c3);
-        p1c1Image3.setFitWidth(100);
-        p1c1Image3.setFitHeight(100);
+        p1c1Image3.setFitWidth(75);
+        p1c1Image3.setFitHeight(75);
+
+        Image p2c1 = new Image(getClass().getResourceAsStream("/facedown.png"));
+        ImageView p2c1Image1 = new ImageView(p2c1);
+        p2c1Image1.setFitWidth(75);
+        p2c1Image1.setFitHeight(75);
+
+        Image p2c2 = new Image(getClass().getResourceAsStream("/facedown.png"));
+        ImageView p2c2Image2 = new ImageView(p2c2);
+        p2c2Image2.setFitWidth(75);
+        p2c2Image2.setFitHeight(75);
+
+        Image p2c3 = new Image(getClass().getResourceAsStream("/facedown.png"));
+        ImageView p2c3Image3 = new ImageView(p2c3);
+        p2c3Image3.setFitWidth(75);
+        p2c3Image3.setFitHeight(75);
 
         HBox deckOfCardsP1 = new HBox(5, p1c1Image1,p1c1Image2,p1c1Image3);
+        HBox deckOfCardsP2 = new HBox(5, p2c1Image1, p2c2Image2, p2c3Image3);
 
-        VBox p1CardsHolder= new VBox(10, deckOfCardsP1);
-        p1CardsHolder.setLayoutX(300);
-        p1CardsHolder.setLayoutY(200);
+//        VBox p1CardsHolder= new VBox(10, deckOfCardsP1);
+//        p1CardsHolder.setLayoutX(300);
+//        p1CardsHolder.setLayoutY(100);
 
-        pane.getChildren().addAll(betsPlayerOne, betsPlayerTwo, contentsPlayerOne, contentsPlayerTwo, p1CardsHolder);
+        //Player 1 contents VBox
+        VBox contentsPlayerOne = new VBox(30, namePlayerOne, deckOfCardsP1, buttonPlayerOne);
+        contentsPlayerOne.setLayoutX(260);
+        contentsPlayerOne.setLayoutY(440);
+
+        //Player 2 contents Vboc
+        VBox contentsPlayerTwo = new VBox(30, namePlayerTwo, deckOfCardsP2, buttonPlayerTwo);
+        contentsPlayerTwo.setLayoutX(1000);
+        contentsPlayerTwo.setLayoutY(440);
+
+        pane.getChildren().addAll(betsPlayerOne, betsPlayerTwo, contentsPlayerOne, contentsPlayerTwo);
 
         BorderPane rootPane = new BorderPane();
         rootPane.setTop(optionsBox);
@@ -136,7 +167,7 @@ public class StartNewGame {
 
         optionsButton.setOnAction(e -> new OptionsMenu(customFont, titleSize, bodySize).show(primaryStage));
 
-        this.scene = new Scene(rootPane, 1000, 1000);
+        this.scene = new Scene(rootPane, 1500, 1000);
     }
 
     public Scene getScene() {

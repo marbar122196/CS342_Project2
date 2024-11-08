@@ -27,6 +27,20 @@ public class Dealer {
         return dealersHand;
     }
 
+    public void dealPlayer(Player player){
+        if (theDeck.size() <= 34){
+            theDeck.newDeck();
+        }
+
+        ArrayList<Card> hand = player.getHand();
+        hand.clear();
+
+        for (int i = 0; i < 3; i++){
+            hand.add(theDeck.get(0));
+            theDeck.remove(0);
+        }
+    }
+
     public Deck getDeck(){
         return theDeck;
     }

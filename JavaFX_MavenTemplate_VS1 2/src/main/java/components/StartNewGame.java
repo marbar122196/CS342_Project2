@@ -96,6 +96,14 @@ public class StartNewGame {
         contentsPlayerTwo.setLayoutX(530);
         contentsPlayerTwo.setLayoutY(310);
 
+        playerOne.dealPlayer();
+        playerTwo.dealPlayer();
+
+        ArrayList<Card> playerOneHand = playerOne.getHand();
+        ArrayList<Card> playerTwoHand = playerTwo.getHand();
+
+
+
         //should we do thing single cards so that it can flip one at a time as a transition?
         Image p1c1 = new Image(getClass().getResourceAsStream("/facedown.png"));
         ImageView p1c1Image1 = new ImageView(p1c1);

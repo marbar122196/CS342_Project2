@@ -14,6 +14,10 @@ public class Player{
         hand = new ArrayList<>();
     }
 
+    public ArrayList<Card> getHand(){
+        return hand;
+    }
+
 
 //    public void resetWinnings(){}
 //    public boolean lockInBets(){}

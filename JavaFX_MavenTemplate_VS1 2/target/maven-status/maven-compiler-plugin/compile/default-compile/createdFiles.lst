@@ -1,10 +1,12 @@
-components/OptionsMenu.class
-components/WinningHandsScreen.class
 Deck.class
 ThreeCardLogic.class
 Player.class
+JavaFXTemplate.class
+components/ExitScreen.class
+components/OptionsMenu.class
+components/WinningHandsScreen.class
+components/StartNewGame.class
 Card.class
 components/RulesScreen.class
 Dealer.class
-JavaFXTemplate.class
-components/ExitScreen.class
+components/WelcomeScreen.class

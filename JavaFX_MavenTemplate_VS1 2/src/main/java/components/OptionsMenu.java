@@ -10,17 +10,26 @@ import javafx.stage.Stage;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.text.Font;
+import gamelogic.*;
 
 public class OptionsMenu {
 
     private Font customFont;
     private int titleSize;
     private int bodySize;
+    private Player playerOne;
+    private Player playerTwo;
+    private Dealer theDealer;
+    private Stage primaryStage;
 
-    public OptionsMenu(Font customFont, int titleSize, int bodySize) {
+    public OptionsMenu(Font customFont, int titleSize, int bodySize, Player playerOne, Player playerTwo, Dealer theDealer, Stage primaryStage) {
         this.customFont = customFont;
         this.titleSize = titleSize;
         this.bodySize = bodySize;
+        this.playerOne = playerOne;
+        this.playerTwo = playerTwo;
+        this.theDealer = theDealer;
+        this.primaryStage = primaryStage;
     }
 
     public void show(Stage primaryStage) {
@@ -46,6 +55,7 @@ public class OptionsMenu {
         rulesButton.setOnAction(e -> new RulesScreen(customFont, titleSize, bodySize).show(optionsStage));
         winningHandsButton.setOnAction(e -> new WinningHandsScreen(customFont, titleSize, bodySize).show(optionsStage));
         exitButton.setOnAction(e -> new ExitScreen(customFont, titleSize).show(optionsStage));
+        freshStartButton.setOnAction(e -> new StartNewGame(customFont,titleSize,bodySize,primaryStage,playerOne,playerTwo,theDealer).show(primaryStage));
 
         VBox optionsContent = new VBox(10, freshStartButton, newLookButton, rulesButton, winningHandsButton, exitButton);
         optionsContent.setAlignment(Pos.CENTER);

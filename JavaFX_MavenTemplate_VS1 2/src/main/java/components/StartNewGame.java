@@ -31,6 +31,7 @@ public class StartNewGame {
     private int bodySize;
     private Scene scene;
 
+
     public StartNewGame(Font customFont, int titleSize, int bodySize, Stage primaryStage, Player playerOne, Player playerTwo, Dealer theDealer) {
         this.customFont = customFont;
         this.titleSize = titleSize;
@@ -261,12 +262,17 @@ public class StartNewGame {
         rootPane.setTop(optionsBox);
         rootPane.setCenter(pane);
 
-        optionsButton.setOnAction(e -> new OptionsMenu(customFont, titleSize, bodySize).show(primaryStage));
+        optionsButton.setOnAction(e -> new OptionsMenu(customFont, titleSize, bodySize, playerOne, playerTwo, theDealer, primaryStage).show(primaryStage));
 
         this.scene = new Scene(rootPane, 1500, 800);
     }
 
     public Scene getScene() {
         return scene;
+    }
+
+    public void show(Stage primaryStage) {
+        primaryStage.setScene(getScene());  // Set the scene for primaryStage
+        primaryStage.show();  // Show primaryStage with the new scene
     }
 }

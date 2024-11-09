@@ -30,6 +30,197 @@ public class StartNewGame {
     private int titleSize;
     private int bodySize;
     private Scene scene;
+    boolean isPlayerTwo = true;
+    private boolean playerOnePress = false;
+    private boolean playerTwoPress = false;
+    private boolean playerOnePressPlay = false;
+    private boolean playerTwoPressPlay = false;
+    private boolean playerOnePressFold = false;
+    private boolean playerTwoPressFold = false;
+    private boolean madePairPlusP1 = false;
+    private boolean madePairPlusP2 = false;
+    ArrayList<Card> dealerHand;
+    ArrayList<Card> playerOneHand;
+    ArrayList<Card> playerTwoHand;
+    TextField gameCommentary;
+    ImageView p1c1Image1;
+    ImageView p1c1Image2;
+    ImageView p1c1Image3;
+
+    ImageView p2c1Image1;
+    ImageView p2c2Image2;
+    ImageView p2c3Image3;
+
+    ImageView dc1Image1;
+    ImageView dc2Image2;
+    ImageView dc3Image3;
+
+
+
+    //this is to reset the images to a facedown position after every round completed
+    public void resetImagesFaceDown(){
+
+        Image p1c1 = new Image(getClass().getResourceAsStream("/facedown.png"));
+        p1c1Image1.setImage(p1c1);
+        Image p1c2 = new Image(getClass().getResourceAsStream("/facedown.png"));
+        p1c1Image2.setImage(p1c2);
+        Image p1c3 = new Image(getClass().getResourceAsStream("/facedown.png"));
+        p1c1Image3.setImage(p1c3);
+
+        Image p2c1 = new Image(getClass().getResourceAsStream("/facedown.png"));
+        p2c1Image1.setImage(p2c1);
+        Image p2c2 = new Image(getClass().getResourceAsStream("/facedown.png"));
+        p2c2Image2.setImage(p2c2);
+        Image p2c3 = new Image(getClass().getResourceAsStream("/facedown.png"));
+        p2c3Image3.setImage(p2c3);
+
+        Image dc1 = new Image(getClass().getResourceAsStream("/facedown.png"));
+        dc1Image1.setImage(dc1);
+        Image dc2 = new Image(getClass().getResourceAsStream("/facedown.png"));
+        dc2Image2.setImage(dc2);
+        Image dc3 = new Image(getClass().getResourceAsStream("/facedown.png"));
+        dc3Image3.setImage(dc3);
+
+    }
+
+    //if two players play we need to check that both of them pressed a button
+    private void checkButtonPress(Button playerOnePlay, Button playerTwoPlay, Button playerOneFold, Button playerTwoFold, Player playerOne, Player playerTwo, TextField p1Play, TextField p2Play, ImageView d1, ImageView d2, ImageView d3, Dealer dealer, Button deal){
+        playerOnePlay.setOnAction(e -> {
+           playerOnePress = true;
+           playerOnePressPlay = true;
+           bothPlayersReady(playerOne, playerTwo, p1Play, p2Play, d1, d2, d3, dealer, deal);
+        });
+
+        playerTwoPlay.setOnAction(e -> {
+            playerTwoPress = true;
+            playerTwoPressPlay = true;
+            bothPlayersReady(playerOne, playerTwo, p1Play, p2Play, d1, d2, d3, dealer, deal);
+        });
+
+        playerOneFold.setOnAction(e -> {
+           playerOnePress = true;
+           playerOnePressFold = true;
+           bothPlayersReady(playerOne, playerTwo, p1Play, p2Play, d1, d2, d3, dealer, deal);
+        });
+
+        playerTwoFold.setOnAction(e -> {
+           playerTwoPress = true;
+           playerTwoPressFold = true;
+           bothPlayersReady(playerOne, playerTwo, p1Play, p2Play, d1, d2, d3, dealer, deal);
+        });
+    }
+
+    //actually execute their button presses
+    private void bothPlayersReady(Player playerOne, Player playerTwo, TextField p1Play, TextField p2Play, ImageView d1, ImageView d2, ImageView d3, Dealer dealer, Button deal){
+        //checks if both players pressed a button
+        //now we have to differentiate between play and fold for both players
+        if (playerOnePress && playerTwoPress){
+            if (playerOnePressPlay){
+                p1Play.setText(playerOne.getAnteBet() + "");
+                playerOne.setPlayBet(playerOne.getAnteBet());
+            }
+            else if (playerOnePressFold){
+                int p1Winnings = playerOne.getWinnings();
+                p1Winnings = p1Winnings - playerOne.getAnteBet();
+            }
+            if (playerTwoPressPlay){
+                p2Play.setText(playerOne.getAnteBet() + "");
+                playerTwo.setPlayBet(playerTwo.getAnteBet());
+            }
+            else if (playerTwoPressFold){
+                int p2Winnings = playerTwo.getWinnings();
+                p2Winnings = p2Winnings - playerTwo.getAnteBet();
+            }
+
+            dealerHand = dealer.getDeck();
+
+            //Converts PlayerOnes hands to strings to grab images
+            String dealerCardOne = "/" + dealerHand.get(0).getSuit() + " " + dealerHand.get(0).getValue() + ".png";
+            String dealerCardTwo = "/" + dealerHand.get(1).getSuit() + " " + dealerHand.get(1).getValue() + ".png";
+            String dealerCardThree = "/" + dealerHand.get(2).getSuit() + " " + dealerHand.get(2).getValue() + ".png";
+
+            Image dealerReavealedOne = new Image(getClass().getResourceAsStream(dealerCardOne));
+            Image dealerRevealedTwo = new Image(getClass().getResourceAsStream(dealerCardTwo));
+            Image dealerRevealedThree = new Image(getClass().getResourceAsStream(dealerCardThree));
+
+            //reveals dealers cards sequentially and then after reveal calls evaluate winner
+            Timeline timeline = new Timeline(
+                    new KeyFrame(Duration.seconds(1), event ->{
+                        d1.setImage(dealerReavealedOne);
+                    }),
+                    new KeyFrame(Duration.seconds(2), event ->{
+                        d2.setImage(dealerRevealedTwo);
+                    }),
+                    new KeyFrame(Duration.seconds(3), event ->{
+                        d3.setImage(dealerRevealedThree);
+
+                        deal.setDisable(false);
+                    }),
+                    new KeyFrame(Duration.seconds(3.5), event -> evaluateWinner())
+            );
+
+            timeline.play();
+        }
+    }
+
+    //evaluates the winner of the rounds
+    public void evaluateWinner(){
+
+        int dealHandVal = ThreeCardLogic.evalHand(dealerHand);
+        if (dealHandVal == 0) {
+            int highestCard = ThreeCardLogic.getHighest(dealerHand);
+
+            if (highestCard < 12) {
+                gameCommentary.setText("Dealer has lost! Ante will be pushed to next round.");
+                return;
+            }
+        }
+
+        int p1Hand = ThreeCardLogic.evalHand(playerOneHand);
+        int winnerP1 = ThreeCardLogic.compareHands(dealerHand, playerOneHand);
+
+        if (playerOnePressPlay && playerTwoPressPlay){
+            int p2Hand = ThreeCardLogic.evalHand(playerTwoHand);
+            int winnerP2 = ThreeCardLogic.compareHands(dealerHand, playerTwoHand);
+
+            if (winnerP1 == 2 && winnerP2 == 2){
+                gameCommentary.setText("Both players won against the dealer! :D");
+            }
+            else if (winnerP1 == 1 && winnerP2 == 2){
+                gameCommentary.setText("Player 1 lost against dealer. Congrats to Player 2!");
+            }
+            else if (winnerP1 == 2 && winnerP2 == 1){
+                gameCommentary.setText("Player 2 lost against dealer. Congrats to Player 1");
+            }
+            else if (winnerP1 == 1 && winnerP2 == 1){
+                gameCommentary.setText("Both player lost against the dealer! >:)");
+            }
+            else{
+                gameCommentary.setText("This game is a tie! :O");
+            }
+        }
+        else if ((playerOnePressPlay || playerTwoPressPlay) && (playerOnePressFold || playerTwoPressFold)){
+            int p2Hand = ThreeCardLogic.evalHand(playerTwoHand);
+            int winnerP2 = ThreeCardLogic.compareHands(dealerHand, playerTwoHand);
+
+            if (winnerP1 == 2 || winnerP2 == 2){
+                gameCommentary.setText("Player won against dealer! :D");
+            }
+            else if (winnerP1 == 1 || winnerP2 == 1){
+                gameCommentary.setText("Dealer won against player! >:)");
+            }
+            else {
+                gameCommentary.setText("This game is a tie! :O");
+            }
+        }
+
+        playerOnePress = false;
+        playerOnePressPlay = false;
+        playerOnePressFold = false;
+        playerTwoPress = false;
+        playerTwoPressPlay = false;
+        playerTwoPressFold = false;
+    }
 
     public StartNewGame(Font customFont, int titleSize, int bodySize, Stage primaryStage, Player playerOne, Player playerTwo, Dealer theDealer) {
         this.customFont = customFont;
@@ -42,11 +233,12 @@ public class StartNewGame {
         optionsBox.setAlignment(Pos.TOP_RIGHT);
         optionsBox.setPadding(new Insets(10));
 
-        TextField gameCommentary = new TextField();
+        gameCommentary = new TextField();
         gameCommentary.setMinWidth(350);
         gameCommentary.setMinHeight(150);
         gameCommentary.setLayoutX(575);
         gameCommentary.setLayoutY(500);
+        gameCommentary.setEditable(false);
 
 
         Button dealGame = new Button("deal");
@@ -136,47 +328,47 @@ public class StartNewGame {
 
         //should we do thing single cards so that it can flip one at a time as a transition?
         Image p1c1 = new Image(getClass().getResourceAsStream("/facedown.png"));
-        ImageView p1c1Image1 = new ImageView(p1c1);
+        p1c1Image1 = new ImageView(p1c1);
         p1c1Image1.setFitWidth(75);
         p1c1Image1.setFitHeight(75);
 
         Image p1c2 = new Image(getClass().getResourceAsStream("/facedown.png"));
-        ImageView p1c1Image2 = new ImageView(p1c2);
+        p1c1Image2 = new ImageView(p1c2);
         p1c1Image2.setFitWidth(75);
         p1c1Image2.setFitHeight(75);
 
         Image p1c3 = new Image(getClass().getResourceAsStream("/facedown.png"));
-        ImageView p1c1Image3 = new ImageView(p1c3);
+        p1c1Image3 = new ImageView(p1c3);
         p1c1Image3.setFitWidth(75);
         p1c1Image3.setFitHeight(75);
 
         Image p2c1 = new Image(getClass().getResourceAsStream("/facedown.png"));
-        ImageView p2c1Image1 = new ImageView(p2c1);
+        p2c1Image1 = new ImageView(p2c1);
         p2c1Image1.setFitWidth(75);
         p2c1Image1.setFitHeight(75);
 
         Image p2c2 = new Image(getClass().getResourceAsStream("/facedown.png"));
-        ImageView p2c2Image2 = new ImageView(p2c2);
+        p2c2Image2 = new ImageView(p2c2);
         p2c2Image2.setFitWidth(75);
         p2c2Image2.setFitHeight(75);
 
         Image p2c3 = new Image(getClass().getResourceAsStream("/facedown.png"));
-        ImageView p2c3Image3 = new ImageView(p2c3);
+        p2c3Image3 = new ImageView(p2c3);
         p2c3Image3.setFitWidth(75);
         p2c3Image3.setFitHeight(75);
 
         Image dc1 = new Image(getClass().getResourceAsStream("/facedown.png"));
-        ImageView dc1Image1 = new ImageView(dc1);
+        dc1Image1 = new ImageView(dc1);
         dc1Image1.setFitWidth(75);
         dc1Image1.setFitHeight(75);
 
         Image dc2 = new Image(getClass().getResourceAsStream("/facedown.png"));
-        ImageView dc2Image2 = new ImageView(dc2);
+        dc2Image2 = new ImageView(dc2);
         dc2Image2.setFitWidth(75);
         dc2Image2.setFitHeight(75);
 
         Image dc3 = new Image(getClass().getResourceAsStream("/facedown.png"));
-        ImageView dc3Image3 = new ImageView(dc3);
+        dc3Image3 = new ImageView(dc3);
         dc3Image3.setFitWidth(75);
         dc3Image3.setFitHeight(75);
 
@@ -185,13 +377,16 @@ public class StartNewGame {
         HBox deckOfCardsD = new HBox(5, dc1Image1, dc2Image2, dc3Image3);
 
         dealGame.setOnAction( e -> {
-            //this needs to happen every round so we can get new cards
+            resetImagesFaceDown();
             theDealer.dealPlayer(playerOne);
             theDealer.dealPlayer(playerTwo);
+            //this needs to happen every round so we can get new cards
+            dealerHand = theDealer.getHand();
+            gameCommentary.clear();
 
             //Actually grabs the hands for both players
-            ArrayList<Card> playerOneHand = playerOne.getHand();
-            ArrayList<Card> playerTwoHand = playerTwo.getHand();
+            playerOneHand = playerOne.getHand();
+            playerTwoHand = playerTwo.getHand();
 
             //Converts PlayerOnes hands to strings to grab images
             String playerOneCardOne = "/" + playerOneHand.get(0).getSuit() + " " + playerOneHand.get(0).getValue() + ".png";
@@ -210,9 +405,10 @@ public class StartNewGame {
 
             //Revealed Cards for Player Two
             Image playerTwoRevealedOne = new Image(getClass().getResourceAsStream(playerTwoCardOne));
-            Image playerTwoRevealedTwo = new Image(getClass().getResourceAsStream(playerTwoCardOne));
+            Image playerTwoRevealedTwo = new Image(getClass().getResourceAsStream(playerTwoCardTwo));
             Image playerTwoRevealedThree = new Image(getClass().getResourceAsStream(playerTwoCardThree));
 
+            //reveals cards sequentially
             Timeline timeline = new Timeline(
                     new KeyFrame(Duration.seconds(1), event ->{
                        p1c1Image1.setImage(playerOneRevealedOne);
@@ -233,6 +429,8 @@ public class StartNewGame {
             timeline.play();
 
         });
+
+        checkButtonPress(playerOnePlay, playerTwoPlay, playerOneFold, playerTwoFold, playerOne, playerTwo, playPlayerOne, playPlayerTwo, dc1Image1, dc2Image2, dc3Image3, theDealer, dealGame);
 
 
 

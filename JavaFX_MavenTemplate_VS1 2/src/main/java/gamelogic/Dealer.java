@@ -39,10 +39,16 @@ public class Dealer {
             hand.add(theDeck.get(0));
             theDeck.remove(0);
         }
+
+        player.setHand(hand);
     }
 
     public Deck getDeck(){
         return theDeck;
+    }
+
+    public ArrayList<Card> getHand(){
+        return dealersHand;
     }
 
 }

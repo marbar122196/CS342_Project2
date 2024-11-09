@@ -17,6 +17,10 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
+import javafx.animation.PauseTransition;
+import javafx.util.Duration;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 
 import java.util.ArrayList;
 
@@ -130,27 +134,6 @@ public class StartNewGame {
 
         HBox dealerContents = new HBox(10, r3, dealer);
 
-        //this needs to happen every round so we can get new cards
-       theDealer.dealPlayer(playerOne);
-       theDealer.dealPlayer(playerTwo);
-
-       //Actually grabs the hands for both players
-        ArrayList<Card> playerOneHand = playerOne.getHand();
-        ArrayList<Card> playerTwoHand = playerTwo.getHand();
-
-
-        //Converts PlayerOnes hands to strings to grab images
-        String playerOneCardOne = playerOneHand.get(0).getSuit() + " " + playerOneHand.get(0).getValue() + ".png";
-        String playerOneCardTwo = playerOneHand.get(1).getSuit() + " " + playerOneHand.get(1).getValue() + ".png";
-        String playerOneCardThree = playerOneHand.get(2).getSuit() + " " + playerOneHand.get(2).getValue() + ".png";
-
-
-        //Now doing the same thing but for PlayerTwo
-        String playerTwoCardOne = playerTwoHand.get(0).getSuit() + " " + playerTwoHand.get(0).getValue() + ".png";
-        String playerTwoCardTwo = playerTwoHand.get(1).getSuit() + " " + playerTwoHand.get(1).getValue() + ".png";
-        String playerTwoCardThree = playerTwoHand.get(2).getSuit() + " " + playerTwoHand.get(2).getValue() + ".png";
-
-
         //should we do thing single cards so that it can flip one at a time as a transition?
         Image p1c1 = new Image(getClass().getResourceAsStream("/facedown.png"));
         ImageView p1c1Image1 = new ImageView(p1c1);
@@ -200,6 +183,58 @@ public class StartNewGame {
         HBox deckOfCardsP1 = new HBox(5, p1c1Image1,p1c1Image2,p1c1Image3);
         HBox deckOfCardsP2 = new HBox(5, p2c1Image1, p2c2Image2, p2c3Image3);
         HBox deckOfCardsD = new HBox(5, dc1Image1, dc2Image2, dc3Image3);
+
+        dealGame.setOnAction( e -> {
+            //this needs to happen every round so we can get new cards
+            theDealer.dealPlayer(playerOne);
+            theDealer.dealPlayer(playerTwo);
+
+            //Actually grabs the hands for both players
+            ArrayList<Card> playerOneHand = playerOne.getHand();
+            ArrayList<Card> playerTwoHand = playerTwo.getHand();
+
+            //Converts PlayerOnes hands to strings to grab images
+            String playerOneCardOne = "/" + playerOneHand.get(0).getSuit() + " " + playerOneHand.get(0).getValue() + ".png";
+            String playerOneCardTwo = "/" + playerOneHand.get(1).getSuit() + " " + playerOneHand.get(1).getValue() + ".png";
+            String playerOneCardThree = "/" + playerOneHand.get(2).getSuit() + " " + playerOneHand.get(2).getValue() + ".png";
+
+            //Now doing the same thing but for PlayerTwo
+            String playerTwoCardOne = "/" + playerTwoHand.get(0).getSuit() + " " + playerTwoHand.get(0).getValue() + ".png";
+            String playerTwoCardTwo = "/" + playerTwoHand.get(1).getSuit() + " " + playerTwoHand.get(1).getValue() + ".png";
+            String playerTwoCardThree = "/" +playerTwoHand.get(2).getSuit() + " " + playerTwoHand.get(2).getValue() + ".png";
+
+            //Revealed Cards for Player One
+            Image playerOneRevealedOne = new Image(getClass().getResourceAsStream(playerOneCardOne));
+            Image playerOneRevealedTwo = new Image(getClass().getResourceAsStream(playerOneCardTwo));
+            Image playerOneRevealedThree = new Image(getClass().getResourceAsStream(playerOneCardThree));
+
+            //Revealed Cards for Player Two
+            Image playerTwoRevealedOne = new Image(getClass().getResourceAsStream(playerTwoCardOne));
+            Image playerTwoRevealedTwo = new Image(getClass().getResourceAsStream(playerTwoCardOne));
+            Image playerTwoRevealedThree = new Image(getClass().getResourceAsStream(playerTwoCardThree));
+
+            Timeline timeline = new Timeline(
+                    new KeyFrame(Duration.seconds(1), event ->{
+                       p1c1Image1.setImage(playerOneRevealedOne);
+                       p2c1Image1.setImage(playerTwoRevealedOne);
+                    }),
+                    new KeyFrame(Duration.seconds(2), event ->{
+                        p1c1Image2.setImage(playerOneRevealedTwo);
+                        p2c2Image2.setImage(playerTwoRevealedTwo);
+                    }),
+                    new KeyFrame(Duration.seconds(3), event ->{
+                        p1c1Image3.setImage(playerOneRevealedThree);
+                        p2c3Image3.setImage(playerTwoRevealedThree);
+
+                        dealGame.setDisable(true);
+                    })
+            );
+
+            timeline.play();
+
+        });
+
+
 
 //        VBox p1CardsHolder= new VBox(10, deckOfCardsP1);
 //        p1CardsHolder.setLayoutX(300);

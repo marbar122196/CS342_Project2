@@ -1,7 +1,10 @@
 package components;
 //package gamelogic;
 import gamelogic.*;
-
+//TO DO:
+//IMPLEMENT COMMENTARY FOR BOTH PLAYERS FOLDING
+//SINGLE PLAYER GAMEPLAY
+//DISABLEPLAY BUTTONS UNTIL DEAL BUTTON IS PUSHED
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -61,6 +64,7 @@ public class StartNewGame {
     Dealer dealer;
 
     Button dealGame;
+
 
 
 
@@ -138,7 +142,7 @@ public class StartNewGame {
 
     //if two players play we need to check that both of them pressed a button
     private void checkButtonPress(Button playerOnePlay, Button playerTwoPlay, Button playerOneFold, Button playerTwoFold, Player playerOne, Player playerTwo, TextField p1Play, TextField p2Play, ImageView d1, ImageView d2, ImageView d3, Dealer dealer, Button deal){
-        System.out.println("IN CHECK BUTTON PRESS SHOULD BE HEREEEEEEEEEEEEEEE");
+//        System.out.println("IN CHECK BUTTON PRESS SHOULD BE HEREEEEEEEEEEEEEEE");
         playerOnePlay.setOnAction(e -> {
            playerOnePress = true;
            playerOnePressPlay = true;
@@ -306,6 +310,8 @@ public class StartNewGame {
         playerOnePlay.setMinWidth(75);
         Button playerOneFold = new Button("fold");
         playerOneFold.setMinWidth(75);
+        playerOnePlay.setDisable(true);
+        playerOneFold.setDisable(true);
 
         // Text fields for player 2
         TextField playPlayerTwo = new TextField();
@@ -323,6 +329,8 @@ public class StartNewGame {
         playerTwoPlay.setMinWidth(75);
         Button playerTwoFold = new Button("fold");
         playerTwoFold.setMinWidth(75);
+        playerTwoPlay.setDisable(true);
+        playerTwoFold.setDisable(true);
 
         playPlayerOne.setEditable(false);
         playPlayerTwo.setEditable(false);
@@ -489,6 +497,11 @@ public class StartNewGame {
                         }
 
                         dealGame.setDisable(true);
+
+                        playerOnePlay.setDisable(false);
+                        playerOneFold.setDisable(false);
+                        playerTwoPlay.setDisable(false);
+                        playerTwoFold.setDisable(false);
                     })
             );
 

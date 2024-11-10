@@ -3,6 +3,9 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import gamelogic.*;
+import components.*;
+
 public class TCLTest {
 
     @Test
@@ -102,6 +105,4 @@ public class TCLTest {
 
         assertEquals(0, ThreeCardLogic.evalHand(hand), "should be recognized as a high card");
     }
-
-
 }

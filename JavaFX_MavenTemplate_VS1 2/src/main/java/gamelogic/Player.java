@@ -42,7 +42,7 @@ public class Player{
         return playBet;
     }
 
-    public int getWinnings(){
+    public int getTotalWinnings(){
         return totalWinnings;
     }
 

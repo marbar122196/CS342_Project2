@@ -4,11 +4,10 @@ import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.text.Font;
 
@@ -30,33 +29,30 @@ public class ExitScreen {
 
         // Title label setup
         Label exitScreenTitle = new Label("return to game?");
-        exitScreenTitle.setFont(Font.font(customFont.getFamily(), titleSize));
-        exitScreenTitle.setStyle("-fx-text-fill: #A30262; -fx-text-alignment: center;");
+        exitScreenTitle.getStyleClass().add("purple-label-title");
 
         // Yes button setup
         Button yesButton = new Button("yes<3");
-        yesButton.setFont(customFont);
-        yesButton.setStyle("-fx-text-fill: #A30262;");
+        yesButton.getStyleClass().add("purple-button");
         yesButton.setOnAction(e -> optionsStage.close());
 
         // No button setup
         Button noButton = new Button("no</3");
-        noButton.setFont(customFont);
-        noButton.setStyle("-fx-text-fill: #A30262;");
+        noButton.getStyleClass().add("purple-button");
         noButton.setOnAction(e -> Platform.exit());
 
-        // Button layout setup
-        HBox buttonBox = new HBox(50, yesButton, noButton);
-        buttonBox.setAlignment(Pos.CENTER);
-
-        // Main layout setup
-        VBox exitScreenBox = new VBox(20, exitScreenTitle, buttonBox);
+        // VBox layout for title and buttons
+        VBox exitScreenBox = new VBox(20, exitScreenTitle, yesButton, noButton);
+        exitScreenBox.getStyleClass().add("purple-vbox");
         exitScreenBox.setAlignment(Pos.CENTER);
-        exitScreenBox.setPadding(new Insets(30));
-        exitScreenBox.setStyle("-fx-background-color: #FFFFFF; -fx-border-color: #A30262; -fx-border-width: 15px;");
+
+        // BorderPane setup with styling
+        BorderPane outerPane = new BorderPane();
+        outerPane.getStyleClass().add("purple-outer-pane-border");
+        outerPane.setCenter(exitScreenBox);
 
         // Scene setup and show
-        Scene exitScene = new Scene(exitScreenBox, 500, 250);
+        Scene exitScene = new Scene(outerPane, 500, 300);
         exitScene.getStylesheets().add(getClass().getResource("/style.css").toExternalForm());  // Load default CSS
         exitStage.setScene(exitScene);
         exitStage.showAndWait();

@@ -32,4 +32,13 @@
     -fx-text-alignment: center;
 }
 
+.purple-vbox {
+    -fx-alignment: center;           /* Center content within the VBox */
+    -fx-spacing: 20px;               /* Set spacing between elements */
+    -fx-background-color: #FFFFFF;   /* Background color (optional) */
+    -fx-padding: 20px;               /* Padding around content */
+    -fx-max-width: 450px;            /* Max width for inner content */
+    -fx-max-height: 350px;           /* Max height for inner content */
+}
+
 

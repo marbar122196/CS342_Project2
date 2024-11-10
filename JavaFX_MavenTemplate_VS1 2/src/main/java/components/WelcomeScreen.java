@@ -39,8 +39,8 @@ public class WelcomeScreen {
 
         // Layout structure with a single VBox
         VBox welcomeText = new VBox(20); // 20 is the spacing between elements
-        welcomeText.setAlignment(Pos.CENTER);
         welcomeText.getChildren().addAll(intro, authors, start, exit);
+        welcomeText.getStyleClass().add("purple-vbox");
 
         // Set actions for buttons
         start.setOnAction(e -> onStartGame.run());
@@ -52,10 +52,7 @@ public class WelcomeScreen {
 
         // Center the content
         VBox innerPane = new VBox(welcomeText);
-        innerPane.setStyle("-fx-background-color: #FFFFFF; -fx-padding: 20;");
-        innerPane.setAlignment(Pos.CENTER);
-        innerPane.setMaxWidth(450);
-        innerPane.setMaxHeight(350);
+        innerPane.getStyleClass().add("purple-vbox");
 
         outerPane.setCenter(innerPane);
         outerPane.setPrefSize(500, 400);

@@ -71,6 +71,34 @@
     -fx-background-color: #FFFFFF;  /* Replace with your desired background color */
 }
 
+.new-game-scene{
+
+    -fx-background-color: #FF9A56;  /* Replace with your desired background color */
+
+}
+
+.orange-button {
+    -fx-background-color: #FF9A56;    /* Purple background color */
+    -fx-text-fill: #D52D00;             /* White text color */
+    -fx-font-size: 24px;              /* Font size */
+    -fx-font-family: 'DotGothic16';   /* Set to custom font if applicable */
+    -fx-min-width: 200px;             /* Set minimum width */
+    -fx-pref-width: 200px;            /* Set preferred width */
+    -fx-pref-height: 40px;            /* Set preferred height for uniform height */
+    -fx-alignment: center;            /* Center text within the button */
+}
+.orange-button-deal {
+    -fx-background-color: #FFFFFF;    /* White background color */
+    -fx-text-fill: #D52D00;           /* Text color */
+    -fx-font-size: 24px;              /* Font size */
+    -fx-font-family: 'DotGothic16';   /* Custom font */
+    -fx-min-width: 200px;             /* Minimum width */
+    -fx-pref-width: 200px;            /* Preferred width */
+    -fx-pref-height: 40px;            /* Preferred height */
+    -fx-alignment: center;            /* Center text within the button */
+    -fx-translate-x: 625px;           /* Move button horizontally */
+    -fx-translate-y: 300px;           /* Move button vertically */
+}
 
 .orange-button-smaller {
     -fx-background-color: #FF9A56;    /* Purple background color */
@@ -82,6 +110,7 @@
     -fx-pref-height: 20px;            /* Set preferred height for uniform height */
     -fx-alignment: center;            /* Center text within the button */
 }
+
 
 
 .orange-button-new-look {
@@ -102,3 +131,39 @@
     /* Rainbow gradient effect for text */
     -fx-text-fill: #FFFFFF;
 }
+
+.orange-body-text{
+    -fx-text-fill: #D52D00;
+    -fx-font-size: 22px;
+    -fx-font-family: 'DotGothic16';
+    -fx-text-alignment: center;
+}
+
+.orange-body-text-smaller{
+    -fx-text-fill: #D52D00;
+    -fx-font-size: 17px;
+    -fx-font-family: 'DotGothic16';
+    -fx-text-alignment: center;
+}
+
+.orange-button-smallest {
+    -fx-background-color: #FFFFFF;    /* Purple background color */
+    -fx-text-fill: #D52D00;             /* White text color */
+    -fx-font-size: 12px;              /* Font size */
+    -fx-font-family: 'DotGothic16';   /* Set to custom font if applicable */
+    -fx-min-width: 75px;             /* Set minimum width */
+    -fx-pref-width: 75px;            /* Set preferred width */
+    -fx-pref-height: 10px;            /* Set preferred height for uniform height */
+    -fx-alignment: center;            /* Center text within the button */
+}
+
+.orange-outer-pane-border {
+    -fx-background-color: white, #FF9A56;
+    -fx-background-insets: 0, 15px;
+    -fx-background-radius: 10px, 5px;
+    -fx-padding: 15px;
+    -fx-border-radius: 15px;
+    -fx-pref-width: 400px;
+    -fx-pref-height: 200px;
+}
+

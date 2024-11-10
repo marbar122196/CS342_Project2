@@ -57,6 +57,7 @@ public class ExitScreen {
 
         // Scene setup and show
         Scene exitScene = new Scene(exitScreenBox, 500, 250);
+        exitScene.getStylesheets().add(getClass().getResource("/style.css").toExternalForm());  // Load default CSS
         exitStage.setScene(exitScene);
         exitStage.showAndWait();
     }

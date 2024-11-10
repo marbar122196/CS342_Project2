@@ -52,6 +52,7 @@ public class OptionsMenu {
         winningHandsButton.setMinWidth(200);
         exitButton.setMinWidth(200);
 
+        newLookButton.setOnAction(e -> NewLook.apply(primaryStage.getScene()));
         rulesButton.setOnAction(e -> new RulesScreen(customFont, titleSize, bodySize).show(optionsStage));
         winningHandsButton.setOnAction(e -> new WinningHandsScreen(customFont, titleSize, bodySize).show(optionsStage));
         exitButton.setOnAction(e -> new ExitScreen(customFont, titleSize).show(optionsStage));

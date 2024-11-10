@@ -1,0 +1,35 @@
+/*purple css pop up stuff*/
+/* Class for the main border and background styling */
+.purple-outer-pane-border {
+    -fx-background-color: #A30262;  /* Purple background */
+    -fx-border-color: #A30262;      /* Optional border color to match background */
+    -fx-border-width: 15px;         /* Adjust border width as desired */
+}
+
+.purple-button {
+    -fx-background-color: #A30262;    /* Purple background color */
+    -fx-text-fill: white;             /* White text color */
+    -fx-font-size: 24px;              /* Font size */
+    -fx-font-family: 'DotGothic16';   /* Set to custom font if applicable */
+    -fx-min-width: 200px;             /* Set minimum width */
+    -fx-pref-width: 200px;            /* Set preferred width */
+    -fx-pref-height: 40px;            /* Set preferred height for uniform height */
+    -fx-alignment: center;            /* Center text within the button */
+}
+
+/* Styling for the main label text */
+.purple-label-title {
+    -fx-text-fill: #A30262;
+    -fx-font-size: 30px;
+    -fx-font-family: 'DotGothic16';
+    -fx-text-alignment: center;
+}
+
+.purple-body-text {
+    -fx-text-fill: #A30262;
+    -fx-font-size: 26px;
+    -fx-font-family: 'DotGothic16';
+    -fx-text-alignment: center;
+}
+
+

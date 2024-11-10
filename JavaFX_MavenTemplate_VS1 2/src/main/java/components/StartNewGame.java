@@ -69,6 +69,7 @@ public class StartNewGame {
     TextField antePlayerOne;
     TextField pairPlusPlayerOne;
     TextField amtWinningsPlayerOne;
+    Label handNamePlayerOne;
 
 
     Player playerTwo;
@@ -76,6 +77,7 @@ public class StartNewGame {
     TextField antePlayerTwo;
     TextField pairPlusPlayerTwo;
     TextField amtWinningsPlayerTwo;
+    Label handNamePlayerTwo;
 
 
     Dealer dealer;
@@ -96,6 +98,22 @@ public class StartNewGame {
         int pairPlusNum = Integer.parseInt(pairPlus);
 
         return checkBetValid(pairPlusNum);
+    }
+
+    //helper function to determine winnings for pair plus bet
+    public int ifPairPlusBetMade(Player player){
+        int playerPP = ThreeCardLogic.evalHand(player.getHand());
+
+        if (player.getPairPlusBet() == 0){
+            return -2;
+        }
+
+        if (playerPP > 0){
+            return ThreeCardLogic.evalPPWinnings(player.getHand(), player.getPairPlusBet());
+        }
+        else {
+            return -1;
+        }
     }
 
     //to check if bets was entered before playing game
@@ -126,6 +144,7 @@ public class StartNewGame {
                 else if (p1Bet == -1 && p2Bet == -1) {
                     gameCommentary.setText("Both bets invalid. try again.");
                 }
+
                 else {
                     gameCommentary.setText("Bets look good!");
                     playerOne.setAnteBet(anteP1);
@@ -295,7 +314,12 @@ public class StartNewGame {
 
 
             if (highestCard < 12) {
-                gameCommentary.setText("Dealer has lost! Ante will be pushed to next round.");
+                gameCommentary.setText("Dealer does not have at least Queen high; ante wager is pushed");
+                antePlayerOne.setEditable(false);
+
+                if (isPlayerTwo){
+                    antePlayerTwo.setEditable(false);
+                }
                 return;
             }
         }
@@ -316,18 +340,18 @@ public class StartNewGame {
             }
             else if (winnerP1 == 1 && winnerP2 == 2){
                 gameCommentary.setText("Player 1 lost against dealer. Congrats to Player 2!");
-                winningsP1 = winningsP1 - (playerOne.getAnteBet() * 4);
+                winningsP1 = winningsP1 - (playerOne.getAnteBet() * playerOne.getPlayBet());
                 winningsP2 = winningsP2 + (playerTwo.getAnteBet() * 4);
             }
             else if (winnerP1 == 2 && winnerP2 == 1){
                 gameCommentary.setText("Player 2 lost against dealer. Congrats to Player 1");
                 winningsP1 = winningsP1 + (playerOne.getAnteBet() * 4);
-                winningsP2 = winningsP2 - (playerTwo.getAnteBet() * 4);
+                winningsP2 = winningsP2 - (playerTwo.getAnteBet() + playerTwo.getPlayBet());
             }
             else if (winnerP1 == 1 && winnerP2 == 1){
                 gameCommentary.setText("Both player lost against the dealer! >:)");
-                winningsP1 = winningsP1 - (playerOne.getAnteBet() * 4);
-                winningsP2 = winningsP2 - (playerTwo.getAnteBet() * 4);
+                winningsP1 = winningsP1 - (playerOne.getAnteBet() + playerOne.getAnteBet());
+                winningsP2 = winningsP2 - (playerTwo.getAnteBet() + playerTwo.getAnteBet());
             }
             else{
                 gameCommentary.setText("This game is a tie! :O");
@@ -349,10 +373,10 @@ public class StartNewGame {
             }
             else if (winnerP1 == 1 || winnerP2 == 1){
                 if (winnerP1 == 1){
-                    winningsP1 = winningsP1 - (playerOne.getAnteBet() * 4);
+                    winningsP1 = winningsP1 - (playerOne.getAnteBet() + playerOne.getPlayBet());
                 }
                 else if (winnerP2 == 1){
-                    winningsP2 = winningsP2 - (playerTwo.getAnteBet() * 4);
+                    winningsP2 = winningsP2 - (playerTwo.getAnteBet() + playerTwo.getPlayBet());
                 }
                 gameCommentary.setText("Dealer won against player! >:)");
             }
@@ -366,11 +390,36 @@ public class StartNewGame {
                 gameCommentary.setText("Player won against dealer!");
             }
             else if (winnerP1 == 1){
-                winningsP1 = winningsP1 + (playerOne.getAnteBet() * 4);
+                winningsP1 = winningsP1 - (playerOne.getAnteBet() + playerOne.getPlayBet());
                 gameCommentary.setText("Player lost against dealer");
             }
             else{
                 gameCommentary.setText("This is a draw!");
+            }
+        }
+
+        int playerOnePairPlusMade = ifPairPlusBetMade(playerOne);
+        int playerTwoPairPlusMade = ifPairPlusBetMade(playerTwo);
+
+        if (playerOnePairPlusMade != -2){
+            if (playerOnePairPlusMade != -1){
+                winningsP1 = winningsP1 + playerOnePairPlusMade;
+                gameCommentary.appendText(" Player One won pair plus wager :D +" + playerOnePairPlusMade);
+            }
+            else{
+                winningsP1 = winningsP1 - playerOne.getPairPlusBet();
+                gameCommentary.appendText(" Player One lost pair plus wager :( -" + playerOne.getPairPlusBet());
+            }
+        }
+
+        if (playerTwoPairPlusMade != -2){
+            if (playerTwoPairPlusMade != -1){
+                winningsP2 = winningsP2 + playerTwoPairPlusMade;
+                gameCommentary.appendText(" Player Two won pair plus wager +" + playerTwoPairPlusMade);
+            }
+            else {
+                winningsP2 = winningsP2 - playerTwo.getPairPlusBet();
+                gameCommentary.appendText(" Player Two lost pair plus wager :( -" + playerTwo.getPairPlusBet());
             }
         }
 
@@ -381,8 +430,9 @@ public class StartNewGame {
             playerTwo.setTotalWinnings(winningsP2);
             amtWinningsPlayerTwo.setText(playerTwo.getTotalWinnings() + "");
         }
-        antePlayerOne.clear();
-        antePlayerTwo.clear();
+
+//        antePlayerOne.clear();
+//        antePlayerTwo.clear();
     }
 
     public StartNewGame(Font customFont, int titleSize, int bodySize, Stage primaryStage, Player playerOne, Player playerTwo, Dealer theDealer) {
@@ -490,6 +540,10 @@ public class StartNewGame {
         namePlayerOne = new TextField();
         namePlayerOne.setPromptText("Enter name here: ");
 
+        handNamePlayerOne = new Label("YOUR HAND");
+        handNamePlayerOne.setPrefWidth(50);
+        handNamePlayerOne.setPrefWidth(50);
+
 
         //Buttons for Player 1
         Button playerOnePlay = new Button("play");
@@ -529,6 +583,9 @@ public class StartNewGame {
         namePlayerTwo.setPromptText("Enter name here: ");
         namePlayerTwo.setEditable(false);
 
+        handNamePlayerTwo = new Label("YOUR HAND");
+        handNamePlayerTwo.setPrefWidth(50);
+        handNamePlayerTwo.setPrefWidth(50);
 
         //Buttons for Player 2
         Button playerTwoPlay = new Button("play");
@@ -663,7 +720,9 @@ public class StartNewGame {
 
         pairPlusPlayerOne.setOnAction(event ->{
             if(checkPairPlus() == 0){
+                gameCommentary.setText("Player 1's pair plus bet is valid");
                 pairPlusPlayerOne.setEditable(false);
+                playerOne.setPairPlusBet(Integer.parseInt(pairPlusPlayerOne.getText()));
             }
             else{
                 gameCommentary.setText("Pair plus bet is invalid");
@@ -687,7 +746,9 @@ public class StartNewGame {
 
         pairPlusPlayerTwo.setOnAction(event ->{
             if(checkPairPlus() == 0){
+                gameCommentary.setText("Player Twos pair plus bet is valid!");
                 pairPlusPlayerTwo.setEditable(false);
+                playerTwo.setPairPlusBet(Integer.parseInt(pairPlusPlayerTwo.getText()));
             }
             else{
                 gameCommentary.setText("Pair plus bet is invalid");
@@ -792,13 +853,13 @@ public class StartNewGame {
 
 
         //Player 1 contents VBox
-        VBox contentsPlayerOne = new VBox(30, namePlayerOne, deckOfCardsP1, buttonPlayerOne);
+        VBox contentsPlayerOne = new VBox(30, namePlayerOne, handNamePlayerOne, deckOfCardsP1, buttonPlayerOne);
         contentsPlayerOne.setLayoutX(260);
         contentsPlayerOne.setLayoutY(440);
 
 
         //Player 2 contents Vboc
-        VBox contentsPlayerTwo = new VBox(30, namePlayerTwo, deckOfCardsP2, buttonPlayerTwo);
+        VBox contentsPlayerTwo = new VBox(30, namePlayerTwo, handNamePlayerTwo, deckOfCardsP2, buttonPlayerTwo);
         contentsPlayerTwo.setLayoutX(1000);
         contentsPlayerTwo.setLayoutY(440);
 

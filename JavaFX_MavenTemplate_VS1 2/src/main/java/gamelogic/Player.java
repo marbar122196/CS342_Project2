@@ -42,6 +42,10 @@ public class Player{
         return playBet;
     }
 
+    public int getPairPlusBet(){
+        return pairPlusBet;
+    }
+
     public int getTotalWinnings(){
         return totalWinnings;
     }

@@ -70,4 +70,5 @@ public class OptionsMenu {
         optionsStage.setScene(optionsScene);
         optionsStage.showAndWait();
     }
+
 }

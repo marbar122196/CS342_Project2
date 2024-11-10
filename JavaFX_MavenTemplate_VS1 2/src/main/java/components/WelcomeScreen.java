@@ -1,10 +1,13 @@
 package components;
 
-import javafx.animation.PauseTransition;
+//import javafx.animation.PauseTransition;
 import javafx.application.Platform;
+
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.geometry.Rectangle2D;
+import javafx.stage.Screen; // Import Screen
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
@@ -43,11 +46,12 @@ public class WelcomeScreen {
         welcomeText.getStyleClass().add("purple-vbox");
 
         // Set actions for buttons
-        start.setOnAction(e -> onStartGame.run());
-        exit.setOnAction(e -> {
-            PauseTransition pause = new PauseTransition(Duration.seconds(0.8));
-            pause.setOnFinished(event -> Platform.exit());
-            pause.play();
+        start.setOnAction(e -> {
+            // Set the desired position for the primary stage when switching to the StartNewGame scene
+            Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
+            primaryStage.setX((screenBounds.getWidth() - 1500) / 2);  // Center horizontally, assuming 1500 width for StartNewGame
+            primaryStage.setY((screenBounds.getHeight() - 800) / 2);  // Center vertically, assuming 800 height for StartNewGame
+            onStartGame.run();
         });
 
         // Center the content

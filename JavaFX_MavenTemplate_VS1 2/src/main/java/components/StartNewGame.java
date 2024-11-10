@@ -24,6 +24,10 @@ import javafx.util.Duration;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.control.TextArea;
+import javafx.geometry.Rectangle2D;
+import javafx.stage.Screen;
+import javafx.scene.Scene;
+
 
 import java.util.ArrayList;
 
@@ -814,6 +818,7 @@ public class StartNewGame {
 
 
         optionsButton.setOnAction(e -> new OptionsMenu(customFont, titleSize, bodySize, playerOne, playerTwo, theDealer, primaryStage).show(primaryStage));
+
         rulesButton.setOnAction(e -> new RulesScreen(customFont, titleSize, bodySize).show(primaryStage));
 
         this.scene = new Scene(rootPane, 1500, 800);

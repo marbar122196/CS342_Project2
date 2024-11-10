@@ -39,7 +39,7 @@ public class WelcomeScreen {
 
         // Labels for the title and authors
         Label intro = new Label("Welcome to 3 Card Poker");
-        intro.setFont(customFont);
+        intro.setFonstat(customFont);
         intro.setMinWidth(300);
 
         Label authors = new Label("By Coda and Martha");

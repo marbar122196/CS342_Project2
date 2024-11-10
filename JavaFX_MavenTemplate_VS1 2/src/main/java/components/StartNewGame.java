@@ -4,7 +4,6 @@ import gamelogic.*;
 //TO DO:
 //IMPLEMENT COMMENTARY FOR BOTH PLAYERS FOLDING
 //SINGLE PLAYER GAMEPLAY
-//DISABLEPLAY BUTTONS UNTIL DEAL BUTTON IS PUSHED
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -143,25 +142,35 @@ public class StartNewGame {
     //if two players play we need to check that both of them pressed a button
     private void checkButtonPress(Button playerOnePlay, Button playerTwoPlay, Button playerOneFold, Button playerTwoFold, Player playerOne, Player playerTwo, TextField p1Play, TextField p2Play, ImageView d1, ImageView d2, ImageView d3, Dealer dealer, Button deal){
 //        System.out.println("IN CHECK BUTTON PRESS SHOULD BE HEREEEEEEEEEEEEEEE");
+        ;
+
         playerOnePlay.setOnAction(e -> {
-           playerOnePress = true;
-           playerOnePressPlay = true;
-           bothPlayersReady(playerOne, playerTwo, p1Play, p2Play, d1, d2, d3, dealer, deal);
+            playerOnePlay.setDisable(true);
+            playerOneFold.setDisable(true);
+            playerOnePress = true;
+            playerOnePressPlay = true;
+            bothPlayersReady(playerOne, playerTwo, p1Play, p2Play, d1, d2, d3, dealer, deal);
         });
 
         playerTwoPlay.setOnAction(e -> {
+            playerTwoPlay.setDisable(true);
+            playerTwoFold.setDisable(true);
             playerTwoPress = true;
             playerTwoPressPlay = true;
             bothPlayersReady(playerOne, playerTwo, p1Play, p2Play, d1, d2, d3, dealer, deal);
         });
 
         playerOneFold.setOnAction(e -> {
+            playerOnePlay.setDisable(true);
+            playerOneFold.setDisable(true);
            playerOnePress = true;
            playerOnePressFold = true;
            bothPlayersReady(playerOne, playerTwo, p1Play, p2Play, d1, d2, d3, dealer, deal);
         });
 
         playerTwoFold.setOnAction(e -> {
+            playerTwoPlay.setDisable(true);
+            playerTwoFold.setDisable(true);
            playerTwoPress = true;
            playerTwoPressFold = true;
            bothPlayersReady(playerOne, playerTwo, p1Play, p2Play, d1, d2, d3, dealer, deal);
@@ -275,7 +284,7 @@ public class StartNewGame {
         gameCommentary.setEditable(false);
         gameCommentary.setWrapText(true);
         gameCommentary.setStyle("-fx-padding: 0;");
-        gameCommentary.setText("Will there be a second player joining us? if so change name on right after entering in name of player one :)");
+        gameCommentary.setText("Hello! Please at least enter in an ante wager to get started ($5 <= bet <= $25). Will there be a second player joining us? if so change name on right after entering in name of player one :) (press enter after completing names)");
 
         dealGame = new Button("deal");
         dealGame.setFont(customFont);
@@ -283,6 +292,7 @@ public class StartNewGame {
         dealGame.setMinHeight(50);
         dealGame.setLayoutX(625);
         dealGame.setLayoutY(300);
+        dealGame.setDisable(true);
 
         Pane pane = new Pane();
 
@@ -295,13 +305,23 @@ public class StartNewGame {
         double playerOneX = 260, playerOneY = 440;
         double playerTwoX = 1000, playerTwoY = 440;
 
-        // Text fields for player 1
+        // Text fields and labels for player 1
+        Label playP1 = new Label("Play:");
+        playP1.setFont(customFont);
         TextField playPlayerOne = new TextField();
+
+        Label anteP1 = new Label("Ante: ");
+        anteP1.setFont(customFont);
         TextField antePlayerOne = new TextField();
+
+        Label pairPlusP1 = new Label("Pair Plus: ");
+        pairPlusP1.setFont(customFont);
         TextField pairPlusPlayerOne = new TextField();
+
         Label winningsPlayerOne = new Label("Winnings");
         winningsPlayerOne.setFont(customFont);
         TextField amtWinningsPlayerOne = new TextField();
+
         TextField namePlayerOne = new TextField();
         namePlayerOne.setPromptText("Enter name here: ");
 
@@ -313,13 +333,23 @@ public class StartNewGame {
         playerOnePlay.setDisable(true);
         playerOneFold.setDisable(true);
 
-        // Text fields for player 2
+        // Text fields and labels for player 2
+        Label playP2 = new Label("Play");
+        playP2.setFont(customFont);
         TextField playPlayerTwo = new TextField();
+
+        Label anteP2 = new Label("Ante: ");
+        anteP2.setFont(customFont);
         TextField antePlayerTwo = new TextField();
+
+        Label pairPlusP2 = new Label("Pair Plus: ");
+        anteP2.setFont(customFont);
         TextField pairPlusPlayerTwo = new TextField();
+
         Label winningsPlayerTwo = new Label("Winnings");
         winningsPlayerTwo.setFont(customFont);
         TextField amtWinningsPlayerTwo = new TextField();
+
         TextField namePlayerTwo = new TextField();
         namePlayerTwo.setPromptText("Enter name here: ");
         namePlayerTwo.setEditable(false);
@@ -336,9 +366,9 @@ public class StartNewGame {
         playPlayerTwo.setEditable(false);
 
         // Player 1 bets VBox
-        VBox betsPlayerOne = new VBox(10, playPlayerOne, antePlayerOne, pairPlusPlayerOne, winningsPlayerOne, amtWinningsPlayerOne);
+        VBox betsPlayerOne = new VBox(10, playP1, playPlayerOne, anteP1, antePlayerOne, pairPlusP1, pairPlusPlayerOne, winningsPlayerOne, amtWinningsPlayerOne);
         betsPlayerOne.setLayoutX(100);  // Set the x-coordinate for player one's VBox
-        betsPlayerOne.setLayoutY(500);  // Set the y-coordinate for player one's VBox
+        betsPlayerOne.setLayoutY(400);  // Set the y-coordinate for player one's VBox
 
         Region r1 = new Region();
         r1.setMinWidth(25);
@@ -352,9 +382,9 @@ public class StartNewGame {
         r2.setMinWidth(25);
 
         // Player 2 bets VBox
-        VBox betsPlayerTwo = new VBox(10, playPlayerTwo, antePlayerTwo, pairPlusPlayerTwo, winningsPlayerTwo, amtWinningsPlayerTwo);
+        VBox betsPlayerTwo = new VBox(10, playP2, playPlayerTwo, anteP2, antePlayerTwo, pairPlusP2, pairPlusPlayerTwo, winningsPlayerTwo, amtWinningsPlayerTwo);
         betsPlayerTwo.setLayoutX(1250);  // Set the x-coordinate for player two's VBox
-        betsPlayerTwo.setLayoutY(500);  // Set the y-coordinate for player two's VBox
+        betsPlayerTwo.setLayoutY(400);  // Set the y-coordinate for player two's VBox
 
         //Player 2 buttons HBox
         HBox buttonPlayerTwo = new HBox(10, r2, playerTwoPlay, playerTwoFold);
@@ -421,6 +451,7 @@ public class StartNewGame {
             namePlayerOne.setEditable(false);
             namePlayerOne.setText(nameP1);
             namePlayerTwo.setEditable(true);
+            dealGame.setDisable(false);
         });
 
         namePlayerTwo.setOnAction(event -> {

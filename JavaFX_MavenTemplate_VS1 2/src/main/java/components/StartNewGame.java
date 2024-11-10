@@ -245,12 +245,6 @@ public class StartNewGame {
             }
         }
 
-        playerOnePress = false;
-        playerOnePressPlay = false;
-        playerOnePressFold = false;
-        playerTwoPress = false;
-        playerTwoPressPlay = false;
-        playerTwoPressFold = false;
     }
 
 
@@ -431,6 +425,13 @@ public class StartNewGame {
         });
 
         dealGame.setOnAction( e -> {
+
+            playerOnePress = false;
+            playerOnePressPlay = false;
+            playerOnePressFold = false;
+            playerTwoPress = false;
+            playerTwoPressPlay = false;
+            playerTwoPressFold = false;
 
             //these things needs to happen every round regardless of # of players
             resetImagesFaceDown(); //resets all cards to be face down

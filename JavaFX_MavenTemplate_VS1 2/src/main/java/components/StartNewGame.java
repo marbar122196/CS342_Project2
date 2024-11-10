@@ -482,8 +482,8 @@ public class StartNewGame {
         gameCommentary = new TextArea();
         gameCommentary.setPrefWidth(350);
         gameCommentary.setPrefHeight(150);
-        gameCommentary.setLayoutX(575);
-        gameCommentary.setLayoutY(500);
+//        gameCommentary.setLayoutX(575);
+//        gameCommentary.setLayoutY(500);
         gameCommentary.setEditable(false);
         gameCommentary.setWrapText(true);
         gameCommentary.setStyle("-fx-padding: 0;");
@@ -509,7 +509,7 @@ public class StartNewGame {
 
 // Positioning
         outerBorderPane.setLayoutX(410); // Adjust as needed
-        outerBorderPane.setLayoutY(530); // Adjust as needed
+        outerBorderPane.setLayoutY(550); // Adjust as needed
 
 
 
@@ -671,7 +671,7 @@ public class StartNewGame {
 //        buttonPlayerTwo.setLayoutX(600);
 //        buttonPlayerTwo.setLayoutY(350);
         buttonPlayerTwo.setStyle("-fx-border-color: red; -fx-border-width: 1px;");
-        HBox buttonPlayerTwo = new HBox(10, r2, playerTwoPlay, playerTwoFold);
+
 
 
         Region r3 = new Region();
@@ -912,8 +912,7 @@ public class StartNewGame {
         contentsPlayerOne.setStyle("-fx-border-color: red; -fx-border-width: 1px;");
 
 
-        contentsPlayerOne.setLayoutX(260);
-        contentsPlayerOne.setLayoutY(440);
+
 
 
 
@@ -925,8 +924,6 @@ public class StartNewGame {
         contentsPlayerTwo.setAlignment(Pos.CENTER);
         contentsPlayerTwo.setStyle("-fx-border-color: red; -fx-border-width: 1px;");
 
-        contentsPlayerTwo.setLayoutX(1000);
-        contentsPlayerTwo.setLayoutY(440);
 
 
         //Dealers contents VBox

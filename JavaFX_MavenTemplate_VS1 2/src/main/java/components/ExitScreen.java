@@ -44,7 +44,6 @@ public class ExitScreen {
         // VBox layout for title and buttons
         VBox exitScreenBox = new VBox(20, exitScreenTitle, yesButton, noButton);
         exitScreenBox.getStyleClass().add("purple-vbox");
-        exitScreenBox.setAlignment(Pos.CENTER);
 
         // BorderPane setup with styling
         BorderPane outerPane = new BorderPane();

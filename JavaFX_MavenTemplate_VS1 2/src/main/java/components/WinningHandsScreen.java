@@ -9,6 +9,7 @@ import javafx.stage.Stage;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.text.Font;
+import javafx.scene.layout.BorderPane;
 
 public class WinningHandsScreen {
 
@@ -29,10 +30,10 @@ public class WinningHandsScreen {
         winningHandsStage.initOwner(optionsStage);
         winningHandsStage.setTitle("Winning Hands");
 
+
         // Title label setup
         Label winningHandsTitle = new Label("pair plus winnings");
-        winningHandsTitle.setFont(Font.font(customFont.getFamily(), titleSize));
-        winningHandsTitle.setStyle("-fx-text-fill: #A30262; -fx-text-alignment: center;");
+        winningHandsTitle.getStyleClass().add("purple-label-title");
 
         // Winning hands text label setup
         Label winningHandsText = new Label(
@@ -42,24 +43,26 @@ public class WinningHandsScreen {
                         "Flush: 3 to 1\n\n" +
                         "Pair: 1 to 1"
         );
-        winningHandsText.setFont(Font.font(customFont.getFamily(), bodySize));
-        winningHandsText.setStyle("-fx-text-fill: #A30262; -fx-text-alignment: center;");
+
+        winningHandsText.getStyleClass().add("purple-body-text-smaller");
         winningHandsText.setWrapText(true);
 
         // Escape button setup
         Button escapeButton = new Button("escape");
-        escapeButton.setFont(customFont);
-        escapeButton.setStyle("-fx-background-color: #A30262; -fx-text-fill: white;");
+        escapeButton.getStyleClass().add("purple-button-smaller");
         escapeButton.setOnAction(e -> winningHandsStage.close());
 
         // VBox layout setup
-        VBox winningHandsBox = new VBox(10, winningHandsTitle, winningHandsText, escapeButton);
-        winningHandsBox.setAlignment(Pos.CENTER);
-        winningHandsBox.setPadding(new Insets(30));
-        winningHandsBox.setStyle("-fx-background-color: #FFFFFF; -fx-border-color: #A30262; -fx-border-width: 15px;");
+        VBox winningHandsBox = new VBox(5,winningHandsTitle, winningHandsText, escapeButton);
+        winningHandsBox.getStyleClass().add("purple-vbox");
+
+        BorderPane outerPane = new BorderPane();
+        outerPane.getStyleClass().add("purple-outer-pane-border");
+        outerPane.setCenter(winningHandsBox);
 
         // Scene setup and show
-        Scene winningHandsScene = new Scene(winningHandsBox, 500, 500);
+        Scene winningHandsScene = new Scene(outerPane, 500, 550);
+        winningHandsScene.getStylesheets().add(getClass().getResource("/style.css").toExternalForm());
         winningHandsStage.setScene(winningHandsScene);
         winningHandsStage.showAndWait();
     }

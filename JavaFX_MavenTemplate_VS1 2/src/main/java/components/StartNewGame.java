@@ -32,6 +32,7 @@ import javafx.scene.Scene;
 import java.util.ArrayList;
 
 public class StartNewGame {
+    public ArrayList<String> diffHands = new ArrayList<>();
     private Font customFont;
     private int titleSize;
     private int bodySize;
@@ -85,6 +86,20 @@ public class StartNewGame {
 
     Button dealGame;
 
+    public void populateDiffHands(){
+        diffHands.add("High-Card");
+        diffHands.add("Straight Flush");
+        diffHands.add("Three of a Kind");
+        diffHands.add("Straight");
+        diffHands.add("Flush");
+        diffHands.add("Pair");
+    }
+
+    public String getHandLabel(int Hand){
+
+        return diffHands.get(Hand);
+    }
+
     //if bet is invalid return -1, otherwise return 0
     public int checkBetValid(int bet){
         if (bet < 5 || bet > 25){
@@ -117,7 +132,7 @@ public class StartNewGame {
     }
 
     //to check if bets was entered before playing game
-    public void enableDeal(){
+    public int enableDeal(){
         String nameP1 = namePlayerOne.getText();
         String anteTextP1 = antePlayerOne.getText();
 
@@ -137,12 +152,15 @@ public class StartNewGame {
 
                 if (p1Bet == -1 && p2Bet == 0) {
                     gameCommentary.setText("Player 1's bet is invalid please try again");
+                    return 0;
                 }
                 else if (p2Bet == -1 && p1Bet == 0) {
                     gameCommentary.setText("Player 2's bet is invalid please try again");
+                    return 0;
                 }
                 else if (p1Bet == -1 && p2Bet == -1) {
                     gameCommentary.setText("Both bets invalid. try again.");
+                    return 0;
                 }
 
                 else {
@@ -150,21 +168,21 @@ public class StartNewGame {
                     playerOne.setAnteBet(anteP1);
                     playerTwo.setAnteBet(anteP2);
                     dealGame.setDisable(false);
+                    return 1;
                 }
             }
-            return;
         }
 
         if (p1Bet == -1){
             gameCommentary.setText("Bet is invalid try again");
+            return 0;
         }
         else{
             gameCommentary.setText("Looks great lets get started");
             playerOne.setAnteBet(anteP1);
             dealGame.setDisable(false);
+            return 1;
         }
-
-        return;
     }
     //this is to reset the images to a facedown position after every round completed
     public void resetImagesFaceDown(){
@@ -236,8 +254,12 @@ public class StartNewGame {
 
     //if two players play we need to check that both of them pressed a button
     private void checkButtonPress(Button playerOnePlay, Button playerTwoPlay, Button playerOneFold, Button playerTwoFold, Player playerOne, Player playerTwo, TextField p1Play, TextField p2Play, ImageView d1, ImageView d2, ImageView d3, Dealer dealer, Button deal){
+        System.out.println("HELLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLOOOOOOOOOOOOOOOOOOo + " + playerOnePlay.isDisabled());
 
+        System.out.println("HELLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLOOOOOOOOOOOOOOOOOOo + " + playerTwoPlay.isDisabled());
         playerOnePlay.setOnAction(e -> {
+            System.out.println("playerOnePlay PRESSEDDDDDDDDDDDDdd");
+
             playerOnePlay.setDisable(true);
             playerOneFold.setDisable(true);
             playerOnePress = true;
@@ -247,6 +269,7 @@ public class StartNewGame {
 
 
         playerTwoPlay.setOnAction(e -> {
+            System.out.println("playerTwoPlay PRESSEDDDDDDDDDDDDdd");
             playerTwoPlay.setDisable(true);
             playerTwoFold.setDisable(true);
             playerTwoPress = true;
@@ -275,6 +298,7 @@ public class StartNewGame {
 
 
     private void bothPlayersReady(Player playerOne, Player playerTwo, TextField p1Play, TextField p2Play, ImageView d1, ImageView d2, ImageView d3, Dealer dealer, Button deal) {
+
         if (playerOnePress && (!isPlayerTwo || playerTwoPress)) { //makes it so it works for both single and 2 player mode
             if (playerOnePressPlay) {
                 p1Play.setText(playerOne.getAnteBet() + "");
@@ -547,9 +571,8 @@ public class StartNewGame {
         namePlayerOne.getStyleClass().add("transparent-text-field");
 
         handNamePlayerOne = new Label("YOUR HAND");
-//        handNamePlayerOne.setPrefWidth(50);
-//        handNamePlayerOne.setPrefWidth(50);
         handNamePlayerOne.getStyleClass().add("orange-body-text-smaller");
+        handNamePlayerOne.getStyleClass().add("orange-body-text");
 
 
         //Buttons for Player 1
@@ -592,9 +615,8 @@ public class StartNewGame {
         namePlayerTwo.setEditable(false);
 
         handNamePlayerTwo = new Label("YOUR HAND");
-//        handNamePlayerTwo.setPrefWidth(50);
-//        handNamePlayerTwo.setPrefWidth(50);
         handNamePlayerTwo.getStyleClass().add("orange-body-text-smaller");
+        handNamePlayerTwo.getStyleClass().add("orange-body-text");
 
 
         //Buttons for Player 2
@@ -649,71 +671,70 @@ public class StartNewGame {
 //        buttonPlayerTwo.setLayoutX(600);
 //        buttonPlayerTwo.setLayoutY(350);
         buttonPlayerTwo.setStyle("-fx-border-color: red; -fx-border-width: 1px;");
+        HBox buttonPlayerTwo = new HBox(10, r2, playerTwoPlay, playerTwoFold);
 
 
         Region r3 = new Region();
         r3.setMinWidth(75);
-
 
         HBox dealerContents = new HBox(10, r3, dealer);
         dealerContents.setAlignment(Pos.CENTER);
 //        dealerVBox.setStyle("-fx-border-color: red; -fx-border-width: 1px;");
 
 
-
         //should we do thing single cards so that it can flip one at a time as a transition?
         Image p1c1 = new Image(getClass().getResourceAsStream("/facedown.png"));
         p1c1Image1 = new ImageView(p1c1);
         p1c1Image1.setFitWidth(75);
-        p1c1Image1.setFitHeight(75);
+        p1c1Image1.setFitHeight(100);
 
 
         Image p1c2 = new Image(getClass().getResourceAsStream("/facedown.png"));
         p1c1Image2 = new ImageView(p1c2);
         p1c1Image2.setFitWidth(75);
-        p1c1Image2.setFitHeight(75);
+        p1c1Image2.setFitHeight(100);
 
 
         Image p1c3 = new Image(getClass().getResourceAsStream("/facedown.png"));
         p1c1Image3 = new ImageView(p1c3);
         p1c1Image3.setFitWidth(75);
-        p1c1Image3.setFitHeight(75);
+        p1c1Image3.setFitHeight(100);
 
 
         Image p2c1 = new Image(getClass().getResourceAsStream("/facedown.png"));
         p2c1Image1 = new ImageView(p2c1);
         p2c1Image1.setFitWidth(75);
-        p2c1Image1.setFitHeight(75);
+        p2c1Image1.setFitHeight(100);
 
 
         Image p2c2 = new Image(getClass().getResourceAsStream("/facedown.png"));
         p2c2Image2 = new ImageView(p2c2);
         p2c2Image2.setFitWidth(75);
-        p2c2Image2.setFitHeight(75);
+        p2c2Image2.setFitHeight(100);
 
 
         Image p2c3 = new Image(getClass().getResourceAsStream("/facedown.png"));
         p2c3Image3 = new ImageView(p2c3);
         p2c3Image3.setFitWidth(75);
-        p2c3Image3.setFitHeight(75);
+        p2c3Image3.setFitHeight(100);
 
 
         Image dc1 = new Image(getClass().getResourceAsStream("/facedown.png"));
         dc1Image1 = new ImageView(dc1);
         dc1Image1.setFitWidth(75);
-        dc1Image1.setFitHeight(75);
+        dc1Image1.setFitHeight(100);
 
 
         Image dc2 = new Image(getClass().getResourceAsStream("/facedown.png"));
         dc2Image2 = new ImageView(dc2);
         dc2Image2.setFitWidth(75);
-        dc2Image2.setFitHeight(75);
+        dc2Image2.setFitHeight(100);
 
 
         Image dc3 = new Image(getClass().getResourceAsStream("/facedown.png"));
         dc3Image3 = new ImageView(dc3);
         dc3Image3.setFitWidth(75);
-        dc3Image3.setFitHeight(75);
+        dc3Image3.setFitHeight(100);
 
 
         HBox deckOfCardsP1 = new HBox(5, p1c1Image1,p1c1Image2,p1c1Image3);
@@ -735,8 +756,9 @@ public class StartNewGame {
 
 
         antePlayerOne.setOnAction(event -> {
-            enableDeal();
-            checkButtonPress(playerOnePlay, playerTwoPlay, playerOneFold, playerTwoFold, playerOne, playerTwo, playPlayerOne, playPlayerTwo, dc1Image1, dc2Image2, dc3Image3, theDealer, dealGame);
+            if (enableDeal() == 1){
+                checkButtonPress(playerOnePlay, playerTwoPlay, playerOneFold, playerTwoFold, playerOne, playerTwo, playPlayerOne, playPlayerTwo, dc1Image1, dc2Image2, dc3Image3, theDealer, dealGame);
+            }
         });
 
         pairPlusPlayerOne.setOnAction(event ->{
@@ -748,6 +770,9 @@ public class StartNewGame {
             else{
                 gameCommentary.setText("Pair plus bet is invalid");
             }
+
+            System.out.println("it is getting called in player ones pp");
+            checkButtonPress(playerOnePlay, playerTwoPlay, playerOneFold, playerTwoFold, playerOne, playerTwo, playPlayerOne, playPlayerTwo, dc1Image1, dc2Image2, dc3Image3, theDealer, dealGame);
         });
 
 
@@ -761,8 +786,9 @@ public class StartNewGame {
         });
 
         antePlayerTwo.setOnAction(event ->{
-           enableDeal();
-           checkButtonPress(playerOnePlay, playerTwoPlay, playerOneFold, playerTwoFold, playerOne, playerTwo, playPlayerOne, playPlayerTwo, dc1Image1, dc2Image2, dc3Image3, theDealer, dealGame);
+            if (enableDeal() == 1){
+                checkButtonPress(playerOnePlay, playerTwoPlay, playerOneFold, playerTwoFold, playerOne, playerTwo, playPlayerOne, playPlayerTwo, dc1Image1, dc2Image2, dc3Image3, theDealer, dealGame);
+            }
         });
 
         pairPlusPlayerTwo.setOnAction(event ->{
@@ -774,11 +800,16 @@ public class StartNewGame {
             else{
                 gameCommentary.setText("Pair plus bet is invalid");
             }
+
+            System.out.println("it is getting called in player two pp");
+            checkButtonPress(playerOnePlay, playerTwoPlay, playerOneFold, playerTwoFold, playerOne, playerTwo, playPlayerOne, playPlayerTwo, dc1Image1, dc2Image2, dc3Image3, theDealer, dealGame);
         });
 
 
         dealGame.setOnAction( e -> {
-            if (isPlayerTwo){
+            namePlayerOne.setDisable(true);
+            antePlayerOne.setDisable(true);
+            if (!isPlayerTwo){
                 namePlayerTwo.setDisable(true);
                 antePlayerTwo.setDisable(true);
                 playerTwoPlay.setDisable(true);
@@ -852,12 +883,15 @@ public class StartNewGame {
                             p2c3Image3.setImage(playerTwoRevealedThree);
                         }
 
-                        dealGame.setDisable(true);
-
                         playerOnePlay.setDisable(false);
                         playerOneFold.setDisable(false);
-                        playerTwoPlay.setDisable(false);
-                        playerTwoFold.setDisable(false);
+                        if (isPlayerTwo){
+                            playerTwoPlay.setDisable(false);
+                            playerTwoFold.setDisable(false);
+                        }
+                        checkButtonPress(playerOnePlay, playerTwoPlay, playerOneFold, playerTwoFold, playerOne, playerTwo, playPlayerOne, playPlayerTwo, dc1Image1, dc2Image2, dc3Image3, theDealer, dealGame);
+
+                        dealGame.setDisable(true);
                     })
             );
 
@@ -868,26 +902,31 @@ public class StartNewGame {
         });
 
 
-//        VBox p1CardsHolder= new VBox(10, deckOfCardsP1);
-//        p1CardsHolder.setLayoutX(300);
-//        p1CardsHolder.setLayoutY(100);
-
 
         //Player 1 contents VBox
         VBox contentsPlayerOne = new VBox(10, namePlayerOne, handNamePlayerOne, deckOfCardsP1, buttonPlayerOne);
+
         contentsPlayerOne.setLayoutX(320);
         contentsPlayerOne.setLayoutY(310);
         contentsPlayerOne.setAlignment(Pos.CENTER);
         contentsPlayerOne.setStyle("-fx-border-color: red; -fx-border-width: 1px;");
 
 
+        contentsPlayerOne.setLayoutX(260);
+        contentsPlayerOne.setLayoutY(440);
+
+
 
         //Player 2 contents Vboc
         VBox contentsPlayerTwo = new VBox(10, namePlayerTwo, handNamePlayerTwo, deckOfCardsP2, buttonPlayerTwo);
+
         contentsPlayerTwo.setLayoutX(930);
         contentsPlayerTwo.setLayoutY(310);
         contentsPlayerTwo.setAlignment(Pos.CENTER);
         contentsPlayerTwo.setStyle("-fx-border-color: red; -fx-border-width: 1px;");
+
+        contentsPlayerTwo.setLayoutX(1000);
+        contentsPlayerTwo.setLayoutY(440);
 
 
         //Dealers contents VBox

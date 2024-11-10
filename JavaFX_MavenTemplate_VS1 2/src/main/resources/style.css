@@ -17,6 +17,18 @@
     -fx-alignment: center;            /* Center text within the button */
 }
 
+.purple-button-smaller {
+    -fx-background-color: #A30262;    /* Purple background color */
+    -fx-text-fill: white;             /* White text color */
+    -fx-font-size: 20px;              /* Font size */
+    -fx-font-family: 'DotGothic16';   /* Set to custom font if applicable */
+    -fx-min-width: 150px;             /* Set minimum width */
+    -fx-pref-width: 150px;            /* Set preferred width */
+    -fx-pref-height: 30px;            /* Set preferred height for uniform height */
+    -fx-alignment: center;            /* Center text within the button */
+}
+
+
 /* Styling for the main label text */
 .purple-label-title {
     -fx-text-fill: #A30262;
@@ -32,13 +44,20 @@
     -fx-text-alignment: center;
 }
 
+.purple-body-text-smaller{
+    -fx-text-fill: #A30262;
+    -fx-font-size: 22px;
+    -fx-font-family: 'DotGothic16';
+    -fx-text-alignment: center;
+}
+
 .purple-vbox {
     -fx-alignment: center;           /* Center content within the VBox */
     -fx-spacing: 20px;               /* Set spacing between elements */
     -fx-background-color: #FFFFFF;   /* Background color (optional) */
     -fx-padding: 20px;               /* Padding around content */
-    -fx-max-width: 450px;            /* Max width for inner content */
-    -fx-max-height: 350px;           /* Max height for inner content */
+    /*-fx-max-width: 450px;            !* Max width for inner content *!*/
+    /*-fx-max-height: 350px;           !* Max height for inner content *!*/
 }
 
 

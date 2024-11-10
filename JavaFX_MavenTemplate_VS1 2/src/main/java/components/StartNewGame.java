@@ -411,22 +411,51 @@ public class StartNewGame {
         gameCommentary.setWrapText(true);
         gameCommentary.setStyle("-fx-padding: 0;");
         gameCommentary.setText("Hello! Please at least enter in a name and ante wager to get started ($5 <= bet <= $25). Will there be a second player joining us? if so change name on right after entering in name of player one :) (press enter after completing names)");
+        gameCommentary.getStyleClass().add("orange-body-text-smaller");
+// Outer BorderPane (White Border)
+        // Outer BorderPane (White Border)
+        BorderPane outerBorderPane = new BorderPane();
+        outerBorderPane.getStyleClass().add("orange-outer-pane-border");
+        outerBorderPane.setPrefSize(420, 220); // Adjust size to create the border effect
+
+// Inner BorderPane (Orange Background)
+        BorderPane innerBorderPane = new BorderPane();
+        innerBorderPane.setStyle("-fx-background-color: #FF9A56;"); // Apply the orange background directly to the inner pane
+        innerBorderPane.setPrefSize(400, 200); // Set preferred size for inner pane
+
+
+// Add gameCommentary to the inner pane
+        innerBorderPane.setCenter(gameCommentary);
+
+// Add the inner pane to the center of the outer pane
+        outerBorderPane.setCenter(innerBorderPane);
+
+// Positioning
+        outerBorderPane.setLayoutX(575); // Adjust as needed
+        outerBorderPane.setLayoutY(500); // Adjust as needed
+
+
+
+
 
 
         dealGame = new Button("deal");
-        dealGame.setFont(customFont);
-        dealGame.setMinWidth(240);
-        dealGame.setMinHeight(50);
-        dealGame.setLayoutX(625);
-        dealGame.setLayoutY(300);
+//        dealGame.setFont(customFont);
+//        dealGame.setMinWidth(240);
+//        dealGame.setMinHeight(50);
+//        dealGame.setLayoutX(625);
+//        dealGame.setLayoutY(300);
+        dealGame.getStyleClass().add("orange-button-deal");
         dealGame.setDisable(true);
+        dealGame.setStyle("-fx-opacity: 1;");
+
 
 
         Pane pane = new Pane();
 
 
         Label dealer = new Label("dealer");
-        dealer.setFont(customFont);
+        dealer.getStyleClass().add("orange-body-text");
         dealer.setMinWidth(300);
 
 
@@ -438,22 +467,22 @@ public class StartNewGame {
 
         // Text fields and labels for player 1
         Label playP1 = new Label("Play:");
-        playP1.setFont(customFont);
+        playP1.getStyleClass().add("orange-body-text");
         TextField playPlayerOne = new TextField();
 
 
         Label anteP1 = new Label("Ante: ");
-        anteP1.setFont(customFont);
+        anteP1.getStyleClass().add("orange-body-text");
         antePlayerOne = new TextField();
 
 
         Label pairPlusP1 = new Label("Pair Plus: ");
-        pairPlusP1.setFont(customFont);
+        pairPlusP1.getStyleClass().add("orange-body-text");
         pairPlusPlayerOne = new TextField();
 
 
-        Label winningsPlayerOne = new Label("Winnings");
-        winningsPlayerOne.setFont(customFont);
+        Label winningsPlayerOne = new Label("Winnings:");
+        winningsPlayerOne.getStyleClass().add("orange-body-text");
         amtWinningsPlayerOne = new TextField();
 
 
@@ -463,31 +492,35 @@ public class StartNewGame {
 
         //Buttons for Player 1
         Button playerOnePlay = new Button("play");
-        playerOnePlay.setMinWidth(75);
+        playerOnePlay.getStyleClass().add("orange-button-smallest");
         Button playerOneFold = new Button("fold");
-        playerOneFold.setMinWidth(75);
+        playerOneFold.getStyleClass().add("orange-button-smallest");
         playerOnePlay.setDisable(true);
         playerOneFold.setDisable(true);
+        playerOnePlay.setStyle("-fx-opacity: 1;");
+        playerOneFold.setStyle("-fx-opacity: 1;");
 
 
         // Text fields and labels for player 2
-        Label playP2 = new Label("Play");
-        playP2.setFont(customFont);
+        Label playP2 = new Label("Play:");
+//        playP2.setFont(customFont);
+        playP2.getStyleClass().add("orange-body-text");
         TextField playPlayerTwo = new TextField();
 
 
         Label anteP2 = new Label("Ante: ");
-        anteP2.setFont(customFont);
+//        anteP2.setFont(customFont);
+        anteP2.getStyleClass().add("orange-body-text");
         antePlayerTwo = new TextField();
 
 
         Label pairPlusP2 = new Label("Pair Plus: ");
-        anteP2.setFont(customFont);
+        pairPlusP2.getStyleClass().add("orange-body-text");
         pairPlusPlayerTwo = new TextField();
 
 
-        Label winningsPlayerTwo = new Label("Winnings");
-        winningsPlayerTwo.setFont(customFont);
+        Label winningsPlayerTwo = new Label("Winnings:");
+        winningsPlayerTwo.getStyleClass().add("orange-body-text");
         amtWinningsPlayerTwo = new TextField();
 
 
@@ -498,11 +531,15 @@ public class StartNewGame {
 
         //Buttons for Player 2
         Button playerTwoPlay = new Button("play");
-        playerTwoPlay.setMinWidth(75);
+//        playerTwoPlay.setMinWidth(75);
+        playerTwoPlay.getStyleClass().add("orange-button-smallest");
         Button playerTwoFold = new Button("fold");
-        playerTwoFold.setMinWidth(75);
+//        playerTwoFold.setMinWidth(75);
+        playerTwoFold.getStyleClass().add("orange-button-smallest");
         playerTwoPlay.setDisable(true);
         playerTwoFold.setDisable(true);
+        playerTwoPlay.setStyle("-fx-opacity: 1;");
+        playerTwoFold.setStyle("-fx-opacity: 1;");
 
 
         playPlayerOne.setEditable(false);
@@ -771,7 +808,7 @@ public class StartNewGame {
         dealerVBox.setLayoutY(100);
 
 
-        pane.getChildren().addAll(betsPlayerOne, betsPlayerTwo, contentsPlayerOne, contentsPlayerTwo, dealerVBox, dealGame, gameCommentary);
+        pane.getChildren().addAll(betsPlayerOne, betsPlayerTwo, contentsPlayerOne, contentsPlayerTwo, dealerVBox, dealGame, outerBorderPane);
 
 
         BorderPane rootPane = new BorderPane();
@@ -786,6 +823,9 @@ public class StartNewGame {
 
 
         this.scene = new Scene(rootPane, 1500, 800);
+        this.scene.getStylesheets().add(getClass().getResource("/style.css").toExternalForm());
+        this.scene.getRoot().getStyleClass().add("new-game-scene");
+
     }
 
 

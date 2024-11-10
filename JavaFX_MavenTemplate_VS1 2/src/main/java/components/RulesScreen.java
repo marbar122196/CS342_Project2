@@ -3,10 +3,10 @@ package components;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.text.Font;
 
@@ -27,16 +27,16 @@ public class RulesScreen {
         Stage rulesStage = new Stage();
         rulesStage.initModality(Modality.APPLICATION_MODAL);
         rulesStage.initOwner(optionsStage);
+        rulesStage.setTitle("Rules");
 
         // Title label setup
         Label rulesTitle = new Label("rules");
-        rulesTitle.setFont(Font.font(customFont.getFamily(), titleSize));
-        rulesTitle.setStyle("-fx-text-fill: #A30262; -fx-text-alignment: center;");
+        rulesTitle.getStyleClass().add("purple-label-title");
 
         // Rules text label setup
         Label rulesText = new Label(
                 "Ante Wager: Players place an ante wager ($5 - $25).\n\n" +
-                        "Optional Pair Plus Bet: Players can also make a Pair Plus wager ($5 - $25), paying\n" +
+                        "Optional Pair Plus Bet: Players can also make a Pair Plus wager ($5 - $25), paying " +
                         "based solely on their hand if it has at least a pair of 2’s, regardless of the dealer's hand.\n\n" +
                         "Dealing Cards: Each player and the dealer receive three cards; players’ cards are face\n" +
                         "up, the dealer’s face down.\n\n" +
@@ -49,25 +49,26 @@ public class RulesScreen {
                         "  - Dealer Wins: Player loses both ante and play wagers.\n" +
                         "  - Player Wins: Player receives 1 to 1 payout on both wagers."
         );
-        rulesText.setFont(Font.font(customFont.getFamily(), bodySize));
-        rulesText.setStyle("-fx-text-fill: #A30262; -fx-text-alignment: center;");
+        rulesText.getStyleClass().add("purple-body-text-smaller");
         rulesText.setWrapText(true);
-        rulesText.setAlignment(Pos.CENTER);
 
         // Escape button setup
         Button escapeButton = new Button("escape");
-        escapeButton.setFont(customFont);
-        escapeButton.setStyle("-fx-background-color: #A30262; -fx-text-fill: white;");
+        escapeButton.getStyleClass().add("purple-button-smaller");
         escapeButton.setOnAction(e -> rulesStage.close());
 
-        // VBox layout setup
+        // VBox layout for the title, text, and button
         VBox rulesBox = new VBox(10, rulesTitle, rulesText, escapeButton);
-        rulesBox.setAlignment(Pos.CENTER);
-        rulesBox.setPadding(new Insets(20));
-        rulesBox.setStyle("-fx-background-color: #FFFFFF; -fx-border-color: #A30262; -fx-border-width: 15px;");
+        rulesBox.getStyleClass().add("purple-vbox");
+
+        // Outer pane setup with styling
+        BorderPane outerPane = new BorderPane();
+        outerPane.getStyleClass().add("purple-outer-pane-border");
+        outerPane.setCenter(rulesBox);
 
         // Scene setup and show
-        Scene rulesScene = new Scene(rulesBox, 850, 850);
+        Scene rulesScene = new Scene(outerPane, 900, 850);
+        rulesScene.getStylesheets().add(getClass().getResource("/style.css").toExternalForm());
         rulesStage.setScene(rulesScene);
         rulesStage.showAndWait();
     }

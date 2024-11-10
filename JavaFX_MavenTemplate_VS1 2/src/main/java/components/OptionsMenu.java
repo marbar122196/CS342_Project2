@@ -60,7 +60,9 @@ public class OptionsMenu {
         optionsContent.setPadding(new Insets(20));
         optionsRoot.setCenter(optionsContent);
 
-        Scene optionsScene = new Scene(optionsRoot, 250, 300);
+        Scene optionsScene = new Scene(optionsRoot, 250, 200);
+        optionsScene.getStylesheets().add(getClass().getResource("/style.css").toExternalForm());
+        optionsScene.getRoot().getStyleClass().add("options-scene");
         optionsStage.setScene(optionsScene);
         optionsStage.showAndWait();
     }

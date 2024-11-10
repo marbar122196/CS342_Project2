@@ -50,6 +50,10 @@ public class OptionsMenu {
         winningHandsButton.getStyleClass().add("orange-button-smaller");
         exitButton.getStyleClass().add("orange-button-smaller");
 
+//        newLookButton.setOnAction(e -> {
+//            NewLook.apply(primaryStage.getScene());
+//            primaryStage.setScene(primaryStage.getScene());
+//        });
         newLookButton.setOnAction(e -> NewLook.apply(primaryStage.getScene()));
         winningHandsButton.setOnAction(e -> new WinningHandsScreen(customFont, titleSize, bodySize).show(optionsStage));
         exitButton.setOnAction(e -> new ExitScreen(customFont, titleSize).show(optionsStage));

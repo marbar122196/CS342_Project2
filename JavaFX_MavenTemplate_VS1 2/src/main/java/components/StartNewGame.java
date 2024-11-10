@@ -3,6 +3,7 @@ package components;
 import gamelogic.*;
 //TO DO:
 //IMPLEMENT COMMENTARY FOR BOTH PLAYERS FOLDING
+//CHANGE WINNINGS EARNED BY WHAT CARD THEY GOT
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -380,14 +381,10 @@ public class StartNewGame {
         antePlayerTwo.clear();
     }
 
-
-
-
     public StartNewGame(Font customFont, int titleSize, int bodySize, Stage primaryStage, Player playerOne, Player playerTwo, Dealer theDealer) {
         this.playerOne = playerOne;
         this.playerTwo = playerTwo;
         this.dealer = theDealer;
-
 
         this.customFont = customFont;
         this.titleSize = titleSize;
@@ -781,9 +778,6 @@ public class StartNewGame {
 
         optionsButton.setOnAction(e -> new OptionsMenu(customFont, titleSize, bodySize, playerOne, playerTwo, theDealer, primaryStage).show(primaryStage));
         rulesButton.setOnAction(e -> new RulesScreen(customFont, titleSize, bodySize).show(primaryStage));
-
-
-
 
         this.scene = new Scene(rootPane, 1500, 800);
     }

@@ -1,0 +1,12 @@
+gamelogic\Dealer.class
+gamelogic\Deck.class
+components\StartNewGame.class
+components\OptionsMenu.class
+components\WelcomeScreen.class
+gamelogic\Card.class
+components\RulesScreen.class
+gamelogic\Player.class
+components\ExitScreen.class
+gamelogic\ThreeCardLogic.class
+JavaFXTemplate.class
+components\WinningHandsScreen.class

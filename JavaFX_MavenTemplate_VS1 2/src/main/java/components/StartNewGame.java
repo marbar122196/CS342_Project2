@@ -56,6 +56,11 @@ public class StartNewGame {
     ImageView dc1Image1;
     ImageView dc2Image2;
     ImageView dc3Image3;
+    Player playerOne;
+    Player playerTwo;
+    Dealer dealer;
+
+    Button dealGame;
 
 
 
@@ -100,15 +105,15 @@ public class StartNewGame {
         //reveals dealers cards sequentially and then after reveal calls evaluate winner
         Timeline timeline = new Timeline(
                 new KeyFrame(Duration.seconds(1), event ->{
-                    d1.setImage(dealerReavealedOne);
+                    dc1Image1.setImage(dealerReavealedOne);
                 }),
                 new KeyFrame(Duration.seconds(2), event ->{
-                    d2.setImage(dealerRevealedTwo);
+                    dc2Image2.setImage(dealerRevealedTwo);
                 }),
                 new KeyFrame(Duration.seconds(3), event ->{
-                    d3.setImage(dealerRevealedThree);
+                    dc3Image3.setImage(dealerRevealedThree);
 
-                    deal.setDisable(false);
+                    dealGame.setDisable(false);
                 }),
                 new KeyFrame(Duration.seconds(3.5), event -> evaluateWinner())
         );
@@ -117,7 +122,7 @@ public class StartNewGame {
 
     }
 
-    private void singlePlayerGame(Button playerOnePlay, Button PlayerOneFold, TextField p1Play){
+    private void singlePlayerGame(Button playerOnePlay, Button playerOneFold, TextField p1Play){
         revealDealersCards();
 
         playerOnePlay.setOnAction(e -> {
@@ -133,6 +138,7 @@ public class StartNewGame {
 
     //if two players play we need to check that both of them pressed a button
     private void checkButtonPress(Button playerOnePlay, Button playerTwoPlay, Button playerOneFold, Button playerTwoFold, Player playerOne, Player playerTwo, TextField p1Play, TextField p2Play, ImageView d1, ImageView d2, ImageView d3, Dealer dealer, Button deal){
+        System.out.println("IN CHECK BUTTON PRESS SHOULD BE HEREEEEEEEEEEEEEEE");
         playerOnePlay.setOnAction(e -> {
            playerOnePress = true;
            playerOnePressPlay = true;
@@ -162,26 +168,30 @@ public class StartNewGame {
     private void bothPlayersReady(Player playerOne, Player playerTwo, TextField p1Play, TextField p2Play, ImageView d1, ImageView d2, ImageView d3, Dealer dealer, Button deal){
         //checks if both players pressed a button
         //now we have to differentiate between play and fold for both players
-        if (playerOnePress && playerTwoPress){
-            if (playerOnePressPlay){
+        if (playerOnePress && playerTwoPress) {
+            if (playerOnePressPlay) {
                 p1Play.setText(playerOne.getAnteBet() + "");
                 playerOne.setPlayBet(playerOne.getAnteBet());
-            }
-            else if (playerOnePressFold){
+            } else if (playerOnePressFold) {
                 int p1Winnings = playerOne.getWinnings();
                 p1Winnings = p1Winnings - playerOne.getAnteBet();
+                playerOne.setTotalWinnings(p1Winnings);
             }
-            if (playerTwoPressPlay){
+
+            if (playerTwoPressPlay) {
                 p2Play.setText(playerOne.getAnteBet() + "");
                 playerTwo.setPlayBet(playerTwo.getAnteBet());
-            }
-            else if (playerTwoPressFold){
+            } else if (playerTwoPressFold) {
                 int p2Winnings = playerTwo.getWinnings();
                 p2Winnings = p2Winnings - playerTwo.getAnteBet();
+                playerTwo.setTotalWinnings(p2Winnings);
             }
 
+
+            System.out.println("WAS REACHED ********************************");
             revealDealersCards();
 
+        }
     }
 
     //evaluates the winner of the rounds
@@ -245,6 +255,10 @@ public class StartNewGame {
 
 
     public StartNewGame(Font customFont, int titleSize, int bodySize, Stage primaryStage, Player playerOne, Player playerTwo, Dealer theDealer) {
+        this.playerOne = playerOne;
+        this.playerTwo = playerTwo;
+        this.dealer = theDealer;
+
         this.customFont = customFont;
         this.titleSize = titleSize;
         this.bodySize = bodySize;
@@ -265,7 +279,7 @@ public class StartNewGame {
         gameCommentary.setStyle("-fx-padding: 0;");
         gameCommentary.setText("Will there be a second player joining us? if so change name on right after entering in name of player one :)");
 
-        Button dealGame = new Button("deal");
+        dealGame = new Button("deal");
         dealGame.setFont(customFont);
         dealGame.setMinWidth(240);
         dealGame.setMinHeight(50);
@@ -309,21 +323,6 @@ public class StartNewGame {
         TextField namePlayerTwo = new TextField();
         namePlayerTwo.setPromptText("Enter name here: ");
         namePlayerTwo.setEditable(false);
-
-        namePlayerOne.setOnAction(event -> {
-            String nameP1 = namePlayerOne.getText();
-            namePlayerOne.setEditable(false);
-            namePlayerOne.setText(nameP1);
-            namePlayerTwo.setEditable(true);
-        });
-
-        namePlayerTwo.setOnAction(event -> {
-           String nameP2 = namePlayerTwo.getText();
-           isPlayerTwo = true;
-           namePlayerTwo.setEditable(false);
-           namePlayerTwo.setText(nameP2);
-        });
-
 
         //Buttons for Player 2
         Button playerTwoPlay = new Button("play");
@@ -415,6 +414,22 @@ public class StartNewGame {
         HBox deckOfCardsP2 = new HBox(5, p2c1Image1, p2c2Image2, p2c3Image3);
         HBox deckOfCardsD = new HBox(5, dc1Image1, dc2Image2, dc3Image3);
 
+        namePlayerOne.setOnAction(event -> {
+            String nameP1 = namePlayerOne.getText();
+            namePlayerOne.setEditable(false);
+            namePlayerOne.setText(nameP1);
+            namePlayerTwo.setEditable(true);
+        });
+
+        namePlayerTwo.setOnAction(event -> {
+            String nameP2 = namePlayerTwo.getText();
+            isPlayerTwo = true;
+            namePlayerTwo.setEditable(false);
+            namePlayerTwo.setText(nameP2);
+
+            checkButtonPress(playerOnePlay, playerTwoPlay, playerOneFold, playerTwoFold, playerOne, playerTwo, playPlayerOne, playPlayerTwo, dc1Image1, dc2Image2, dc3Image3, theDealer, dealGame);
+        });
+
         dealGame.setOnAction( e -> {
 
             //these things needs to happen every round regardless of # of players
@@ -479,14 +494,6 @@ public class StartNewGame {
             timeline.play();
 
         });
-
-        if (isPlayerTwo) {
-            checkButtonPress(playerOnePlay, playerTwoPlay, playerOneFold, playerTwoFold, playerOne, playerTwo, playPlayerOne, playPlayerTwo, dc1Image1, dc2Image2, dc3Image3, theDealer, dealGame);
-        }
-        else{
-
-        }
-
 
 //        VBox p1CardsHolder= new VBox(10, deckOfCardsP1);
 //        p1CardsHolder.setLayoutX(300);

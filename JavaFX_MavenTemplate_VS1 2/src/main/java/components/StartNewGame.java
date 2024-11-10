@@ -271,8 +271,9 @@ public class StartNewGame {
         this.bodySize = bodySize;
 
         Button optionsButton = new Button("Options");
+        Button rulesButton = new Button("rules");
         optionsButton.setMinWidth(100);
-        HBox optionsBox = new HBox(optionsButton);
+        VBox optionsBox = new VBox(optionsButton,rulesButton);
         optionsBox.setAlignment(Pos.TOP_RIGHT);
         optionsBox.setPadding(new Insets(10));
 
@@ -566,6 +567,8 @@ public class StartNewGame {
         rootPane.setCenter(pane);
 
         optionsButton.setOnAction(e -> new OptionsMenu(customFont, titleSize, bodySize, playerOne, playerTwo, theDealer, primaryStage).show(primaryStage));
+        rulesButton.setOnAction(e -> new RulesScreen(customFont, titleSize, bodySize).show(primaryStage));
+
 
         this.scene = new Scene(rootPane, 1500, 800);
     }

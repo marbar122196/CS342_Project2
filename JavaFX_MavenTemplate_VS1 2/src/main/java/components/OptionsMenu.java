@@ -42,23 +42,20 @@ public class OptionsMenu {
 
         Button freshStartButton = new Button("fresh start");
         Button newLookButton = new Button("new look");
-        Button rulesButton = new Button("rules");
         Button winningHandsButton = new Button("winning hands");
         Button exitButton = new Button("exit >:(");
 
         freshStartButton.setMinWidth(200);
         newLookButton.setMinWidth(200);
-        rulesButton.setMinWidth(200);
         winningHandsButton.setMinWidth(200);
         exitButton.setMinWidth(200);
 
         newLookButton.setOnAction(e -> NewLook.apply(primaryStage.getScene()));
-        rulesButton.setOnAction(e -> new RulesScreen(customFont, titleSize, bodySize).show(optionsStage));
         winningHandsButton.setOnAction(e -> new WinningHandsScreen(customFont, titleSize, bodySize).show(optionsStage));
         exitButton.setOnAction(e -> new ExitScreen(customFont, titleSize).show(optionsStage));
         freshStartButton.setOnAction(e -> new StartNewGame(customFont,titleSize,bodySize,primaryStage,playerOne,playerTwo,theDealer).show(primaryStage));
 
-        VBox optionsContent = new VBox(10, freshStartButton, newLookButton, rulesButton, winningHandsButton, exitButton);
+        VBox optionsContent = new VBox(10, freshStartButton, newLookButton, winningHandsButton, exitButton);
         optionsContent.setAlignment(Pos.CENTER);
         optionsContent.setPadding(new Insets(20));
         optionsRoot.setCenter(optionsContent);

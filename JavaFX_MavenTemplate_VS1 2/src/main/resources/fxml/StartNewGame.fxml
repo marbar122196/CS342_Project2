@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Pos?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="components.StartNewGameController" stylesheets="@style.css">
+    <!-- Top Section for Options -->
+    <top>
+        <VBox alignment="TOP_RIGHT" styleClass="optionsBox">
+            <Button fx:id="optionsButton" text="Options"/>
+            <Button fx:id="rulesButton" text="Rules"/>
+        </VBox>
+    </top>
+
+    <!-- Center Section for Game Elements -->
+    <center>
+        <Pane fx:id="pane">
+            <!-- Game Commentary Area -->
+            <BorderPane fx:id="outerBorderPane" layoutX="410" layoutY="550" prefWidth="700" prefHeight="150" styleClass="orange-outer-pane-border">
+                <center>
+                    <BorderPane style="-fx-background-color: #FF9A56;">
+                        <center>
+                            <TextArea fx:id="gameCommentary" editable="false" wrapText="true" prefWidth="350" prefHeight="150" styleClass="orange-body-text-smaller"/>
+                        </center>
+                    </BorderPane>
+                </center>
+            </BorderPane>
+
+            <!-- Player 1 Information -->
+            <VBox fx:id="contentsPlayerOne" layoutX="320" layoutY="310" alignment="CENTER" spacing="10" styleClass="orange-body-text-smaller">
+                <TextField fx:id="namePlayerOne" promptText="Enter name here:" styleClass="transparent-text-field"/>
+                <Label fx:id="handNamePlayerOne" text="YOUR HAND" styleClass="orange-body-text"/>
+                <HBox fx:id="deckOfCardsP1" spacing="5" styleClass="deck-box">
+                    <ImageView fx:id="p1c1Image1" fitWidth="75" fitHeight="100"/>
+                    <ImageView fx:id="p1c1Image2" fitWidth="75" fitHeight="100"/>
+                    <ImageView fx:id="p1c1Image3" fitWidth="75" fitHeight="100"/>
+                </HBox>
+                <HBox spacing="20">
+                    <Button fx:id="playerOnePlay" text="Play" disable="true" styleClass="orange-button-smallest"/>
+                    <Button fx:id="playerOneFold" text="Fold" disable="true" styleClass="orange-button-smallest"/>
+                </HBox>
+            </VBox>
+
+            <!-- Player 2 Information -->
+            <VBox fx:id="contentsPlayerTwo" layoutX="930" layoutY="310" alignment="CENTER" spacing="10" styleClass="orange-body-text-smaller">
+                <TextField fx:id="namePlayerTwo" promptText="Enter name here:" styleClass="transparent-text-field" editable="false"/>
+                <Label fx:id="handNamePlayerTwo" text="YOUR HAND" styleClass="orange-body-text"/>
+                <HBox fx:id="deckOfCardsP2" spacing="5" styleClass="deck-box">
+                    <ImageView fx:id="p2c1Image1" fitWidth="75" fitHeight="100"/>
+                    <ImageView fx:id="p2c2Image2" fitWidth="75" fitHeight="100"/>
+                    <ImageView fx:id="p2c3Image3" fitWidth="75" fitHeight="100"/>
+                </HBox>
+                <HBox spacing="20">
+                    <Button fx:id="playerTwoPlay" text="Play" disable="true" styleClass="orange-button-smallest"/>
+                    <Button fx:id="playerTwoFold" text="Fold" disable="true" styleClass="orange-button-smallest"/>
+                </HBox>
+            </VBox>
+
+            <!-- Dealer Information -->
+            <VBox layoutX="625" layoutY="60" alignment="CENTER" spacing="10" styleClass="orange-body-text-smaller">
+                <HBox fx:id="deckOfCardsD" spacing="5" styleClass="deck-box">
+                    <ImageView fx:id="dc1Image1" fitWidth="75" fitHeight="100"/>
+                    <ImageView fx:id="dc2Image2" fitWidth="75" fitHeight="100"/>
+                    <ImageView fx:id="dc3Image3" fitWidth="75" fitHeight="100"/>
+                </HBox>
+                <Label text="Dealer" styleClass="orange-body-text"/>
+                <HBox alignment="CENTER" spacing="10">
+                    <Button fx:id="dealGame" text="Deal" disable="true" styleClass="orange-button-deal"/>
+                </HBox>
+            </VBox>
+        </Pane>
+    </center>
+</BorderPane>

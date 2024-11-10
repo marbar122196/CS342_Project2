@@ -45,10 +45,10 @@ public class OptionsMenu {
         Button winningHandsButton = new Button("winning hands");
         Button exitButton = new Button("exit >:(");
 
-        freshStartButton.setMinWidth(200);
-        newLookButton.setMinWidth(200);
-        winningHandsButton.setMinWidth(200);
-        exitButton.setMinWidth(200);
+        freshStartButton.getStyleClass().add("orange-button-smaller");
+        newLookButton.getStyleClass().add("orange-button-new-look");
+        winningHandsButton.getStyleClass().add("orange-button-smaller");
+        exitButton.getStyleClass().add("orange-button-smaller");
 
         newLookButton.setOnAction(e -> NewLook.apply(primaryStage.getScene()));
         winningHandsButton.setOnAction(e -> new WinningHandsScreen(customFont, titleSize, bodySize).show(optionsStage));
@@ -60,7 +60,7 @@ public class OptionsMenu {
         optionsContent.setPadding(new Insets(20));
         optionsRoot.setCenter(optionsContent);
 
-        Scene optionsScene = new Scene(optionsRoot, 250, 200);
+        Scene optionsScene = new Scene(optionsRoot, 250, 230);
         optionsScene.getStylesheets().add(getClass().getResource("/style.css").toExternalForm());
         optionsScene.getRoot().getStyleClass().add("options-scene");
         optionsStage.setScene(optionsScene);

@@ -56,8 +56,38 @@
     -fx-spacing: 20px;               /* Set spacing between elements */
     -fx-background-color: #FFFFFF;   /* Background color (optional) */
     -fx-padding: 20px;               /* Padding around content */
-    /*-fx-max-width: 450px;            !* Max width for inner content *!*/
-    /*-fx-max-height: 350px;           !* Max height for inner content *!*/
+}
+
+.options-scene {
+    -fx-background-color: #FFFFFF;  /* Replace with your desired background color */
+}
+
+.orange-button-smaller {
+    -fx-background-color: #FF9A56;    /* Purple background color */
+    -fx-text-fill: #D52D00;             /* White text color */
+    -fx-font-size: 20px;              /* Font size */
+    -fx-font-family: 'DotGothic16';   /* Set to custom font if applicable */
+    -fx-min-width: 150px;             /* Set minimum width */
+    -fx-pref-width: 200px;            /* Set preferred width */
+    -fx-pref-height: 20px;            /* Set preferred height for uniform height */
+    -fx-alignment: center;            /* Center text within the button */
+}
+
+.orange-button-new-look {
+    -fx-background-color: #FF9A56;     /* Solid background color */
+    -fx-background-insets: 0;          /* Removes padding around gradient */
+    -fx-background-radius: 5px;        /* Adds rounded corners, if desired */
+
+    /* Text style */
+    -fx-font-size: 20px;               /* Font size */
+    -fx-font-family: 'DotGothic16';    /* Custom font */
+    -fx-min-width: 150px;              /* Minimum width */
+    -fx-pref-width: 200px;             /* Preferred width */
+    -fx-pref-height: 40px;             /* Preferred height */
+    -fx-alignment: center;             /* Center text */
+
+    /* Rainbow gradient effect for text */
+    -fx-text-fill: #FFFFFF;
 }
 
 

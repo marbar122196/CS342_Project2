@@ -451,6 +451,8 @@ public class StartNewGame {
         VBox optionsBox = new VBox(optionsButton,rulesButton);
         optionsBox.setAlignment(Pos.TOP_RIGHT);
         optionsBox.setPadding(new Insets(10));
+        optionsBox.setStyle("-fx-border-color: red; -fx-border-width: 1px;");
+
 
 
         gameCommentary = new TextArea();
@@ -467,12 +469,12 @@ public class StartNewGame {
         // Outer BorderPane (White Border)
         BorderPane outerBorderPane = new BorderPane();
         outerBorderPane.getStyleClass().add("orange-outer-pane-border");
-        outerBorderPane.setPrefSize(420, 220); // Adjust size to create the border effect
+        outerBorderPane.setPrefSize(700, 150); // Adjust size to create the border effect
 
 // Inner BorderPane (Orange Background)
         BorderPane innerBorderPane = new BorderPane();
         innerBorderPane.setStyle("-fx-background-color: #FF9A56;"); // Apply the orange background directly to the inner pane
-        innerBorderPane.setPrefSize(400, 200); // Set preferred size for inner pane
+        innerBorderPane.setPrefSize(680, 130); // Set preferred size for inner pane
 
 
 // Add gameCommentary to the inner pane
@@ -482,13 +484,14 @@ public class StartNewGame {
         outerBorderPane.setCenter(innerBorderPane);
 
 // Positioning
-        outerBorderPane.setLayoutX(575); // Adjust as needed
-        outerBorderPane.setLayoutY(500); // Adjust as needed
+        outerBorderPane.setLayoutX(410); // Adjust as needed
+        outerBorderPane.setLayoutY(530); // Adjust as needed
 
 
 
 
-
+        Region r4 = new Region();
+        r4.setMinWidth(20);
 
         dealGame = new Button("deal");
 //        dealGame.setFont(customFont);
@@ -499,6 +502,8 @@ public class StartNewGame {
         dealGame.getStyleClass().add("orange-button-deal");
         dealGame.setDisable(true);
         dealGame.setStyle("-fx-opacity: 1;");
+        HBox dealGameBox = new HBox(r4,dealGame);
+
 
 
 
@@ -539,10 +544,12 @@ public class StartNewGame {
 
         namePlayerOne = new TextField();
         namePlayerOne.setPromptText("Enter name here: ");
+        namePlayerOne.getStyleClass().add("transparent-text-field");
 
         handNamePlayerOne = new Label("YOUR HAND");
-        handNamePlayerOne.setPrefWidth(50);
-        handNamePlayerOne.setPrefWidth(50);
+//        handNamePlayerOne.setPrefWidth(50);
+//        handNamePlayerOne.setPrefWidth(50);
+        handNamePlayerOne.getStyleClass().add("orange-body-text-smaller");
 
 
         //Buttons for Player 1
@@ -581,11 +588,14 @@ public class StartNewGame {
 
         namePlayerTwo = new TextField();
         namePlayerTwo.setPromptText("Enter name here: ");
+        namePlayerTwo.getStyleClass().add("transparent-text-field");
         namePlayerTwo.setEditable(false);
 
         handNamePlayerTwo = new Label("YOUR HAND");
-        handNamePlayerTwo.setPrefWidth(50);
-        handNamePlayerTwo.setPrefWidth(50);
+//        handNamePlayerTwo.setPrefWidth(50);
+//        handNamePlayerTwo.setPrefWidth(50);
+        handNamePlayerTwo.getStyleClass().add("orange-body-text-smaller");
+
 
         //Buttons for Player 2
         Button playerTwoPlay = new Button("play");
@@ -607,33 +617,38 @@ public class StartNewGame {
         // Player 1 bets VBox
         VBox betsPlayerOne = new VBox(10, playP1, playPlayerOne, anteP1, antePlayerOne, pairPlusP1, pairPlusPlayerOne, winningsPlayerOne, amtWinningsPlayerOne);
         betsPlayerOne.setLayoutX(100);  // Set the x-coordinate for player one's VBox
-        betsPlayerOne.setLayoutY(400);  // Set the y-coordinate for player one's VBox
+        betsPlayerOne.setLayoutY(220);  // Set the y-coordinate for player one's VBox
+        betsPlayerOne.setStyle("-fx-border-color: red; -fx-border-width: 1px;");
 
 
         Region r1 = new Region();
-        r1.setMinWidth(25);
+        r1.setMinWidth(12);
 
 
         //Player 1 buttons Hbox
-        HBox buttonPlayerOne = new HBox(10, r1, playerOnePlay, playerOneFold);
+        HBox buttonPlayerOne = new HBox(20, r1, playerOnePlay, playerOneFold);
 //        buttonPlayerOne.setLayoutX(260);
 //        buttonPlayerOne.setLayoutY(350);
+        buttonPlayerOne.setStyle("-fx-border-color: red; -fx-border-width: 1px;");
+
 
 
         Region r2 = new Region();
-        r2.setMinWidth(25);
+        r2.setMinWidth(15);
 
 
         // Player 2 bets VBox
         VBox betsPlayerTwo = new VBox(10, playP2, playPlayerTwo, anteP2, antePlayerTwo, pairPlusP2, pairPlusPlayerTwo, winningsPlayerTwo, amtWinningsPlayerTwo);
         betsPlayerTwo.setLayoutX(1250);  // Set the x-coordinate for player two's VBox
-        betsPlayerTwo.setLayoutY(400);  // Set the y-coordinate for player two's VBox
+        betsPlayerTwo.setLayoutY(220);  // Set the y-coordinate for player two's VBox
+        betsPlayerTwo.setStyle("-fx-border-color: red; -fx-border-width: 1px;");
 
 
         //Player 2 buttons HBox
-        HBox buttonPlayerTwo = new HBox(10, r2, playerTwoPlay, playerTwoFold);
+        HBox buttonPlayerTwo = new HBox(20, r2, playerTwoPlay, playerTwoFold);
 //        buttonPlayerTwo.setLayoutX(600);
 //        buttonPlayerTwo.setLayoutY(350);
+        buttonPlayerTwo.setStyle("-fx-border-color: red; -fx-border-width: 1px;");
 
 
         Region r3 = new Region();
@@ -641,6 +656,9 @@ public class StartNewGame {
 
 
         HBox dealerContents = new HBox(10, r3, dealer);
+        dealerContents.setAlignment(Pos.CENTER);
+//        dealerVBox.setStyle("-fx-border-color: red; -fx-border-width: 1px;");
+
 
 
         //should we do thing single cards so that it can flip one at a time as a transition?
@@ -701,6 +719,9 @@ public class StartNewGame {
         HBox deckOfCardsP1 = new HBox(5, p1c1Image1,p1c1Image2,p1c1Image3);
         HBox deckOfCardsP2 = new HBox(5, p2c1Image1, p2c2Image2, p2c3Image3);
         HBox deckOfCardsD = new HBox(5, dc1Image1, dc2Image2, dc3Image3);
+        deckOfCardsP1.setStyle("-fx-border-color: red; -fx-border-width: 1px;");
+        deckOfCardsP2.setStyle("-fx-border-color: red; -fx-border-width: 1px;");
+
 
 
         namePlayerOne.setOnAction(event -> {
@@ -853,24 +874,33 @@ public class StartNewGame {
 
 
         //Player 1 contents VBox
-        VBox contentsPlayerOne = new VBox(30, namePlayerOne, handNamePlayerOne, deckOfCardsP1, buttonPlayerOne);
-        contentsPlayerOne.setLayoutX(260);
-        contentsPlayerOne.setLayoutY(440);
+        VBox contentsPlayerOne = new VBox(10, namePlayerOne, handNamePlayerOne, deckOfCardsP1, buttonPlayerOne);
+        contentsPlayerOne.setLayoutX(320);
+        contentsPlayerOne.setLayoutY(310);
+        contentsPlayerOne.setAlignment(Pos.CENTER);
+        contentsPlayerOne.setStyle("-fx-border-color: red; -fx-border-width: 1px;");
+
 
 
         //Player 2 contents Vboc
-        VBox contentsPlayerTwo = new VBox(30, namePlayerTwo, handNamePlayerTwo, deckOfCardsP2, buttonPlayerTwo);
-        contentsPlayerTwo.setLayoutX(1000);
-        contentsPlayerTwo.setLayoutY(440);
+        VBox contentsPlayerTwo = new VBox(10, namePlayerTwo, handNamePlayerTwo, deckOfCardsP2, buttonPlayerTwo);
+        contentsPlayerTwo.setLayoutX(930);
+        contentsPlayerTwo.setLayoutY(310);
+        contentsPlayerTwo.setAlignment(Pos.CENTER);
+        contentsPlayerTwo.setStyle("-fx-border-color: red; -fx-border-width: 1px;");
 
 
         //Dealers contents VBox
-        VBox dealerVBox = new VBox(10, deckOfCardsD, dealerContents);
+        VBox dealerVBox = new VBox(10, deckOfCardsD, dealerContents,dealGameBox);
+        dealerVBox.setAlignment(Pos.CENTER);
         dealerVBox.setLayoutX(625);
-        dealerVBox.setLayoutY(100);
+        dealerVBox.setLayoutY(60);
+        dealerVBox.setStyle("-fx-border-color: red; -fx-border-width: 1px;");
 
 
-        pane.getChildren().addAll(betsPlayerOne, betsPlayerTwo, contentsPlayerOne, contentsPlayerTwo, dealerVBox, dealGame, outerBorderPane);
+
+
+        pane.getChildren().addAll(betsPlayerOne, betsPlayerTwo, contentsPlayerOne, contentsPlayerTwo, dealerVBox, outerBorderPane);
 
 
         BorderPane rootPane = new BorderPane();

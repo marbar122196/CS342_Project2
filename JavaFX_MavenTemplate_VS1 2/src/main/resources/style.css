@@ -1,3 +1,4 @@
+
 /*purple css pop up stuff*/
 /* Class for the main border and background styling */
 .purple-outer-pane-border {
@@ -6,8 +7,9 @@
     -fx-border-width: 15px;         /* Adjust border width as desired */
 }
 
+
 .purple-button {
-    -fx-background-color: #A30262;    /* Purple background color */
+    -fx-background-color: #B55690;    /* Purple background color */
     -fx-text-fill: white;             /* White text color */
     -fx-font-size: 24px;              /* Font size */
     -fx-font-family: 'DotGothic16';   /* Set to custom font if applicable */
@@ -17,8 +19,9 @@
     -fx-alignment: center;            /* Center text within the button */
 }
 
+
 .purple-button-smaller {
-    -fx-background-color: #A30262;    /* Purple background color */
+    -fx-background-color: #B55690;    /* Purple background color */
     -fx-text-fill: white;             /* White text color */
     -fx-font-size: 20px;              /* Font size */
     -fx-font-family: 'DotGothic16';   /* Set to custom font if applicable */
@@ -29,27 +32,32 @@
 }
 
 
+
+
 /* Styling for the main label text */
 .purple-label-title {
-    -fx-text-fill: #A30262;
+    -fx-text-fill: #B55690;
     -fx-font-size: 30px;
     -fx-font-family: 'DotGothic16';
     -fx-text-alignment: center;
 }
 
+
 .purple-body-text {
-    -fx-text-fill: #A30262;
+    -fx-text-fill: #B55690;
     -fx-font-size: 26px;
     -fx-font-family: 'DotGothic16';
     -fx-text-alignment: center;
 }
 
+
 .purple-body-text-smaller{
-    -fx-text-fill: #A30262;
+    -fx-text-fill: #B55690;
     -fx-font-size: 22px;
     -fx-font-family: 'DotGothic16';
     -fx-text-alignment: center;
 }
+
 
 .purple-vbox {
     -fx-alignment: center;           /* Center content within the VBox */
@@ -58,9 +66,11 @@
     -fx-padding: 20px;               /* Padding around content */
 }
 
+
 .options-scene {
     -fx-background-color: #FFFFFF;  /* Replace with your desired background color */
 }
+
 
 .orange-button-smaller {
     -fx-background-color: #FF9A56;    /* Purple background color */
@@ -73,10 +83,12 @@
     -fx-alignment: center;            /* Center text within the button */
 }
 
+
 .orange-button-new-look {
     -fx-background-color: #FF9A56;     /* Solid background color */
     -fx-background-insets: 0;          /* Removes padding around gradient */
     -fx-background-radius: 5px;        /* Adds rounded corners, if desired */
+
 
     /* Text style */
     -fx-font-size: 20px;               /* Font size */
@@ -86,8 +98,7 @@
     -fx-pref-height: 40px;             /* Preferred height */
     -fx-alignment: center;             /* Center text */
 
+
     /* Rainbow gradient effect for text */
     -fx-text-fill: #FFFFFF;
 }
-
-
